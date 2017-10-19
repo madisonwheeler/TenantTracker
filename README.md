@@ -18,9 +18,11 @@ clone this repo to your local machine
 
 open terminal and cd into TenantTracker
 
-run `bower install` (only necessary when cloned for the first time)
+run `bower install`
 
-to view the project run `node server`
+run `npm install`
+
+run `node server` to view project on localhost:8080 
 
 
 
