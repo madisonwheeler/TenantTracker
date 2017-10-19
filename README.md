@@ -8,6 +8,7 @@ Tenant Tracker will introduce effective communication to landlords and tenants. 
 
 ## Dependencies and Software
 Tenant tracker is built with MEAN.js (Angularjs, MongoDB, Epress, and Node)
+
 Starting template provided by scotch-io [here](https://github.com/scotch-io/starter-node-angular)
 
 ## How to run(linux only)
