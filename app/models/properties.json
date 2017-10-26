@@ -1,0 +1,54 @@
+{
+  "properties": [
+     	{ "property": 
+     		{ "$code": 224 }, 
+		     "name": "14th apartment",
+		     "street": "2174 14th Street",
+		     "city": "Troy",
+		     "state": "NY",
+		     "zipcode": 12180,
+		     "landlord": {
+		 		"$username": "mike3917", 
+		 		"name": "Mike Johnson", 
+		 		"email": "testthemike@mike.org",
+		 		"password": "123and4",
+		 		"phone_number": 3333333333
+		     },
+		     "tenants": [
+		     	{ "tenant": 
+		     		{ "$username": "wheelm4" }, 
+		     		"name": "Madison Wheeler", 
+		     		"email": "wheelm4@rpi.edu",
+		     		"password": "Test123",
+		     		"phone_number": 9788214594
+		     	},
+		     	{ "tenant": 
+		     		{ "$username": "glushkovaa" }, 
+		     		"name": "Tanya Glushkova", 
+		     		"email": "test123@testing.org",
+		     		"password": "Test1234",
+		     		"phone_number": 1234567890
+		     	},
+		     	{ "tenant": 
+		     		{ "$username": "ZWest34" }, 
+		     		"name": "Zoe Westwater", 
+		     		"email": "whatatest@hotmail.com",
+		     		"password": "Test1235",
+		     		"phone_number": 1111111111,
+		     	}
+		  	],
+		  	"rentpayments": [
+			    { "rent": { "$rent": 02192017 }, "tenant_status": "Sent", "landlord_status": "Recieved", "latefee": 0 },
+			    { "rent": { "$rent": 03212017 }, "tenant_status": "Sent", "landlord_status": "Recieved", "latefee": 0 },
+			    { "rent": { "$rent": 04162017 }, "tenant_status": "Sent", "landlord_status": "Not Recieved", "latefee": 20 }
+		  	],
+			"appliances": [
+			    { "appliance": { "$appliance": 1393804800000 }, "name": "Downstairs Toilet", "brand": "Dyson", "Status": "Needs Repair", "image": "https://secure.img1-fg.wfcdn.com/im/79091869/resize-h299-p1-w299%5Ecompr-r85/2877/28775070/33%22+x+21%22+Farmhouse+Kitchen+Sink.jpg" },
+			    { "appliance": { "$appliance": 1378857600000 }, "name": "Kitchen Sink", "brand": "sink", "J&J": "Good", "image": "http://tellmenothing.com/wp-content/uploads/2017/06/file5611259936465.jpg" },
+			    { "appliance": { "$appliance": 1358985600000 }, "name": "Downstairs Washing Machine", "Mandy's Machines": "washingmachine", "Status": "Good", "image": "https://cnet4.cbsistatic.com/img/fAJu6aLlsPMR6AeYaD_m7gxPAsk=/830x467/2017/07/14/251e2639-91a1-4205-88d5-56c046e6a4ec/maytag-washer-1.jpg" },
+			    { "appliance": { "$appliance": 1322006400000 }, "name": "Basment Dryer", "brand": "John Deere", "Status": "Needs Repair", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Modern_front_load_tumble_dryer.JPG/1200px-Modern_front_load_tumble_dryer.JPG" },
+			    { "appliance": { "$appliance": 1299715200000 }, "name": "Bathroom Heater", "brand": "Ratiator Supply", "Status": "Good", "image": "https://modernize.com/wp-content/uploads/2015/11/column-radiator.jpg" }
+			],
+		}
+	]
+}
