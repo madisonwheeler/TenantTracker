@@ -1,1 +1,34 @@
 body { padding-top:30px; }
+
+
+ul.banner-login-buttons {
+  margin-top: 0; }
+  @media (max-width: 1199px) {
+    ul.banner-login-buttons {
+      margin-top: 15px; } }
+  @media (max-width: 767px) {
+    ul.banner-login-buttons li {
+      display: block;
+      margin-bottom: 20px;
+      padding: 0; }
+      ul.banner-login-buttons li:last-child {
+        margin-bottom: 0; } }
+
+.btn {
+/*  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+  font-weight: 400;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  border-radius: 0; }
+
+.btn-default {
+  color: indianred;
+  border: 1px solid indianred;
+  background-color: transparent; }
+  .btn-default:focus, .btn-default:hover {
+    color: black;
+    border: 1px solid indianred;
+    outline: none;
+    background-color: indianred; }
