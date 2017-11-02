@@ -1,4 +1,4 @@
-//var Property = require('./models/Property');
+var Property = require('./models/Property');
 var User = require('./models/Users');
 var Todo = require('./models/Todo');
 
