@@ -1,1 +1,1 @@
-angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'LandlordCtrl', 'LandlordService', 'TenantCtrl', 'TenantService']);
+angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'LandlordCtrl', 'LandlordService', 'TenantCtrl', 'TenantService', 'ApplianceCtrl']);

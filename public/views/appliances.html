@@ -3,19 +3,19 @@
   <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Tenant Tracker</a>
+        <a class="navbar-brand" href="landlord.html">Tenant Tracker</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="#">Properties
-                <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="appliances">Appliances</a>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Appliances</a>
+              <span class="sr-only">(current)</span>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Rent History</a>
@@ -26,10 +26,10 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" ng-controller="ApplianceController">
 
       <!-- Page Heading -->
-      <h1 class="my-4">Welcome Landlord!</h1>
+      <h1 class="my-4">Appliances</h1>
 
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
@@ -37,9 +37,16 @@
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Property 1</a>
+                <a href="#">Appliance 1</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+              <button class="btn btn-primary" ng-click="requestRepair()" ng-show="reqRepairButton">Request Repairs</button>
+                <div class="form-group" ng-show="repairRequested">
+                  <label for="repairRequest"><b>Description:</b></label>
+                  <textarea class="form-control" id="repairRequest" rows="3"></textarea>
+                  <button class="btn btn-primary" ng-click="">Submit</button>
+                </div>
+
             </div>
           </div>
         </div>
@@ -48,7 +55,7 @@
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Property 2</a>
+                <a href="#">Appliance 2</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
@@ -59,7 +66,7 @@
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Property 3</a>
+                <a href="#">Appliance 3</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
             </div>
@@ -70,7 +77,7 @@
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Property 4</a>
+                <a href="#">Appliance 4</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
