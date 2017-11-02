@@ -4,7 +4,6 @@ var rentPaymentSchema = new mongoose.Schema({
     
         name:  { type: String },
         date: { type: Number },
-        image: { type: String },
         tenant_status: { 
 			type: String,
 			Enum: ["Sent", "Not Sent"]
