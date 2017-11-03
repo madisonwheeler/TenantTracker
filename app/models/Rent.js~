@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
-var rentPaymentSchema = new mongoose.Schema;
-rentPaymentSchema.add({
+var rentPaymentSchema = new mongoose.Schema({
     
         name:  { type: String },
 	amount: {type: Number},
