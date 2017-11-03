@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
-var applianceSchema = new mongoose.Schema;
-applianceSchema.add({
+var applianceSchema = new mongoose.Schema({
     
         name:  { type: String },
         brand: { type: String },

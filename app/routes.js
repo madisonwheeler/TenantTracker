@@ -10,16 +10,18 @@ module.exports = function(app) {
 // api calls ===========================================================
 	
 	//Get All	
-	/*app.get('/api/properties', function(req, res) {
+	app.get('/api/properties', function(req, res) {
 
-		Property.find(function(err, properties) {
-		    if (err)
+		Property.find({}).populate({ path: 'appliances', match: { store: req.params.storeId } }).exec(function(err, properties) {
+		console.log(properties[0].appliances);
+		    
+		if (err)
 		        res.send(err)
 
 		    res.json(properties); // return all todos in JSON format
 		});
 
-    	});*/
+    	});
 	app.get('/api/todos', function(req, res) {
 
 		Todo.find(function(err, todos) {
