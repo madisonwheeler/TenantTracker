@@ -3,4 +3,8 @@ angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', fu
     $scope.landlordLogin = function(){
        window.location = "/landlord";
    	}
-}
+    
+    $scope.home = function(){
+        window.location = "/home";
+    }
+})

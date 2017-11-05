@@ -3,5 +3,4 @@ angular.module('TenantLoginCtrl', []).controller('TenantLoginController', functi
     $scope.tenantLogin = function(){
        window.location = "/tenant";
    	}
-
-}
+})
