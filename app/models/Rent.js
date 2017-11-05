@@ -17,3 +17,4 @@ rentPaymentSchema.add({
     });
 
 module.exports = mongoose.model('Rent', rentPaymentSchema);
+//module.exports = rentPaymentSchema;

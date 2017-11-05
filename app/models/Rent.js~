@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
-var rentPaymentSchema = new mongoose.Schema({
+var rentPaymentSchema = new mongoose.Schema;
+rentPaymentSchema.add({
     
         name:  { type: String },
 	amount: {type: Number},
@@ -15,4 +16,5 @@ var rentPaymentSchema = new mongoose.Schema({
 	}
     });
 
-module.exports = mongoose.model('Rent', rentPaymentSchema);
+//module.exports = mongoose.model('Rent', rentPaymentSchema);
+module.exports = rentPaymentSchema;

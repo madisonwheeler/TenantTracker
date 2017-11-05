@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-var user = require('./Users.js');
-var rent = require('./Rent.js');
-var appliance = require('./Appliance.js');
+var user = require('./Users');
+var rent = require('./Rent');
+var appliance = require('./Appliance');
 
 var propertySchema = new mongoose.Schema;
 propertySchema.add({
@@ -9,17 +9,29 @@ propertySchema.add({
     address: String,
     users: [{
         type: mongoose.Schema.Types.ObjectId,
+	require: true,
         ref: user
     }],
     rent_payments: [{
         type: mongoose.Schema.Types.ObjectId,
+	require: true,
         ref: rent
     }], 
     appliances: [{
         type: mongoose.Schema.Types.ObjectId,
+	require: true,
         ref: appliance
     }]
 });
+/*var propertySchema = new mongoose.Schema;
+propertySchema.add({
+    name: String,
+    address: String,
+    users: [user],
+    rent_payments: [rent], 
+    appliances: [appliance]
+});*/
+
 
 module.exports = mongoose.model('Property', propertySchema);
 /*

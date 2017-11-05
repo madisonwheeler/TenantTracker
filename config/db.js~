@@ -6,7 +6,8 @@ module.exports = {
     version of property and user databases*/
 
     // dev url
-    url : 'mongodb://localhost:/TenantTracker'
+    //url : 'mongodb://localhost:/TenantTracker'
+	url : 'mongodb://localhost:/tt2'
 
     // prod url 
     //tdb

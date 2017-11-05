@@ -15,3 +15,4 @@ applianceSchema.add({
     });
 
 module.exports = mongoose.model('Appliance', applianceSchema);
+//module.exports = applianceSchema;

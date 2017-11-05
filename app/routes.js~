@@ -1,6 +1,9 @@
 var Property = require('./models/Property');
 var User = require('./models/Users');
-var Todo = require('./models/Todo');
+var Rent = require('./models/Rent');
+var Appliance = require('./models/Appliance');
+var Unit = require('./models/Unit');
+//var Todo = require('./models/Todo');
 
 module.exports = function(app) {
 
@@ -12,17 +15,15 @@ module.exports = function(app) {
 	//Get All	
 	app.get('/api/properties', function(req, res) {
 
-		Property.find({}).populate({ path: 'appliances', match: { store: req.params.storeId } }).exec(function(err, properties) {
-		console.log(properties[0].appliances);
-		    
+		Unit.find({}).exec(function(err, units) {
 		if (err)
 		        res.send(err)
 
-		    res.json(properties); // return all todos in JSON format
+		    res.json(units); // return all todos in JSON format
 		});
 
     	});
-	app.get('/api/todos', function(req, res) {
+	/*app.get('/api/todos', function(req, res) {
 
 		Todo.find(function(err, todos) {
 		    if (err)
@@ -31,7 +32,7 @@ module.exports = function(app) {
 		    res.json(todos); // return all todos in JSON format
 		});
 
-    	});
+    	});*/
 	
 
 	// Create

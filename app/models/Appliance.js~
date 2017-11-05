@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
-var applianceSchema = new mongoose.Schema({
+var applianceSchema = new mongoose.Schema;
+applianceSchema.add({
     
         name:  { type: String },
         brand: { type: String },
@@ -13,4 +14,5 @@ var applianceSchema = new mongoose.Schema({
 	
     });
 
-module.exports = mongoose.model('Appliance', applianceSchema);
+//module.exports = mongoose.model('Appliance', applianceSchema);
+module.exports = applianceSchema;
