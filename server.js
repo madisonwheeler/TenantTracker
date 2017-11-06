@@ -2,6 +2,7 @@
 
 var express        = require('express');
 var app            = express();
+var http = require('http').Server(app);
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');

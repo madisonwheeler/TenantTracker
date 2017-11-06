@@ -26,7 +26,7 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container" ng-controller="ApplianceController">
+    <div class="container" ng-controller="ApplianceController" ng-init="loadAppliances()">
 
       <!-- Page Heading -->
       <h1 class="my-4">Appliances</h1>
@@ -37,49 +37,19 @@
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Appliance 1</a>
+                <a href="#">{{appliances.appliance1_name}}</a>
               </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+              <p>Status: {{appliances.appliance1_status}}</p>
+              <p>Description: {{appliances.repairDesc}}</p>
               <button class="btn btn-primary" ng-click="requestRepair()" ng-show="reqRepairButton">Request Repairs</button>
+              <button class="btn btn-danger" ng-click="needsRepair()" ng-show="needsRepairButton">Needs Repairs</button>
                 <div class="form-group" ng-show="repairRequested">
                   <label for="repairRequest"><b>Description:</b></label>
-                  <textarea class="form-control" id="repairRequest" rows="3"></textarea>
-                  <button class="btn btn-primary" ng-click="">Submit</button>
+                  <textarea class="form-control" id="repairRequest" rows="3" ng-model="repairDesc"></textarea>
+                  <button class="btn btn-primary" ng-click="submitRepair()">Submit</button>
                 </div>
+              <div class="alert alert-success" role="alert" ng-show="successMsg">Success!</div>
 
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Appliance 2</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Appliance 3</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Appliance 4</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
           </div>
         </div>
@@ -89,10 +59,12 @@
     </div>
     <!-- /.container -->
 
-    <!-- Footer -->
+<!--     
+  //Footer
     <footer class="py-5 bg-dark fixed-bottom">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
       </div>
-      <!-- /.container -->
-    </footer>
+      
+    </footer> 
+-->
