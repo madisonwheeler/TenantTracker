@@ -7,6 +7,16 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			templateUrl: 'views/home.html',
 			controller: 'MainController'
 		})
+  
+        .when('/tenantLogin', {
+            templateUrl: 'views/tenantLogin.html',
+            controller: 'TenantLoginController'
+        })
+    
+        .when('/landlordLogin', {
+            templateUrl: 'views/landlordLogin.html',
+            controller: 'LandlordLoginController'
+        })
 
 		.when('/landlord', {
 			templateUrl: 'views/landlord.html',
