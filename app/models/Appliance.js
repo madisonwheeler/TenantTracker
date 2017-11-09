@@ -1,18 +1,15 @@
-var mongoose = require('mongoose');
-
-var applianceSchema = new mongoose.Schema;
-applianceSchema.add({
-    
-        name:  { type: String },
-        brand: { type: String },
-        image: { type: String },
-	status_note:{type:String},
-        status: { 
-			type: String,
-			Enum: ["Needs Repair", "Good"]
-		}
-	
-    });
-
-module.exports = mongoose.model('Appliance', applianceSchema);
-//module.exports = applianceSchema;
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var Appliances = sequelize.define('Appliances', {
+    name: DataTypes.STRING,
+    image: DataTypes.STRING,
+    status: DataTypes.STRING
+  }, {
+    classMethods: {
+      associate: function(models) {
+        // associations can be defined here
+      }
+    }
+  });
+  return Appliances;
+};

@@ -1,20 +1,15 @@
-var mongoose = require('mongoose');
-
-var rentPaymentSchema = new mongoose.Schema;
-rentPaymentSchema.add({
-    
-        name:  { type: String },
-	amount: {type: Number},
-        date: { type: Number },
-        tenant_status: { 
-			type: String,
-			Enum: ["Sent", "Not Sent"]
-		},
-	landlord_status: { 
-		type: String,
-		Enum: ["Received", "Not Received"]
-	}
-    });
-
-module.exports = mongoose.model('Rent', rentPaymentSchema);
-//module.exports = rentPaymentSchema;
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var Rent = sequelize.define('Rent', {
+    date: DataTypes.NUMBER,
+    landlord_status: DataTypes.STRING,
+    tenant_status: DataTypes.STRING
+  }, {
+    classMethods: {
+      associate: function(models) {
+        // associations can be defined here
+      }
+    }
+  });
+  return Rent;
+};
