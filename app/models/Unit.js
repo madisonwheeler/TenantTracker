@@ -15,72 +15,15 @@ unitSchema.add({
     address: String,
     code: String,
 
-    landlord_name: String,
-    landlord_email: String,
-    landlord_username: String,
-    landlord_password: String,
-    landlord_phone_number: Number,
+    landlord_id: String,
 
-    tenant_name: String,
-    tenant_email: String,
-    tenant_username: String,
-    tenant_password: String,
-    tenant_phone_number: Number,
+    tenant_id: String, 
     
-    appliance1_name: String,
-    appliance1_image: String,
-    appliance1_status: String,
-    repairDesc: String,
+    appliance_ids: [String],
 
-    rent_date: String,
-    landlord_status: String,
-    tenant_status: String
+    rent_ids: [String],
 });
 
-
-
-// var unitSchema = new mongoose.Schema;
-// unitSchema.add({
-//     name: String,
-//     address: String,
-//     code: String,
-
-//     landlord_name: String,
-//     landlord_email: String,
-//     landlord_username: String,
-//     landlord_password: String,
-//     landlord_phone_number: Number,
-
-//     tenant_name: String,
-//     tenant_email: String,
-//     tenant_username: String,
-//     tenant_password: String,
-//     tenant_phone_number: Number,
-    
-//     appliance1_name: String,
-//     appliance1_image: String,
-//     appliance1_status: String,
-    
-//     appliance2_name: String,
-//     appliance2_image: String,
-//     appliance2_status: String,
-
-//     appliance3_name: String,
-//     appliance3_image: String,
-//     appliance3_status: String,
-
-//     appliance4_name: String,
-//     appliance4_image: String,
-//     appliance4_status: String,
-
-//     appliance5_name: String,
-//     appliance5_image: String,
-//     appliance5_status: String,
-
-//     rent_date: String,
-//     landlord_status: String,
-//     tenant_status: String
-// });
 
 module.exports = mongoose.model('Unit', unitSchema);
 /*
