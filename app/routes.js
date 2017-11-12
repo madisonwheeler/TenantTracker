@@ -4,6 +4,13 @@ var Rent = require('./models/Rent');
 var Appliance = require('./models/Appliance');
 var Unit = require('./models/Unit');
 //var Todo = require('./models/Todo');
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'tenanttracker.cma6st4fitis.us-east-2.rds.amazonaws.com',
+  user     : 'root',
+  password : 'strongpass',
+  database : 'tenantTracker'
+});
 
 module.exports = function(app) {
 
@@ -11,6 +18,25 @@ module.exports = function(app) {
 	
 
 // api calls ===========================================================
+	
+		//Get All using MySQL
+	app.get('/api/propertiesMYSQL', function(req, res) {
+		connection.connect();
+		var SQLquery = 'select * From tenantTracker.User LEFT JOIN tenantTracker.Property on tenantTracker.User.landlord_id=tenantTracker.Property.landlord_id LEFT JOIN tenantTracker.Rent on tenantTracker.Property.id=tenantTracker.Rent.property_id LEFT JOIN tenantTracker.Appliance on tenantTracker.Property.id=tenantTracker.Appliance.property_id;';
+		var ret = [];
+		connection.query(SQLquery, function(err, rows, fields) {
+		    if (err)
+		        res.send(err);
+		    else {
+		    	//convert to json
+		        ret = JSON.stringify(rows);
+		        //console.log('The solution is: ', ret);
+		        res.json(ret);
+		    }
+		    //doStuffwithTheResult(ret);
+		});
+		connection.end();
+    	});
 	
 	//Get All	
 	app.get('/api/properties', function(req, res) {
