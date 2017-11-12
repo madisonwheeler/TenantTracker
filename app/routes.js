@@ -19,7 +19,7 @@ module.exports = function(app) {
 
 // api calls ===========================================================
 	
-		//Get All using MySQL
+	//Get All using MySQL
 	app.get('/api/propertiesMYSQL', function(req, res) {
 		connection.connect();
 		var SQLquery = 'select * From tenantTracker.User LEFT JOIN tenantTracker.Property on tenantTracker.User.landlord_id=tenantTracker.Property.landlord_id LEFT JOIN tenantTracker.Rent on tenantTracker.Property.id=tenantTracker.Rent.property_id LEFT JOIN tenantTracker.Appliance on tenantTracker.Property.id=tenantTracker.Appliance.property_id;';
