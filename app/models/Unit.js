@@ -14,14 +14,24 @@ unitSchema.add({
     name: String,
     address: String,
     code: String,
-
-    landlord_id: String,
-
-    tenant_id: String, 
+    landlord_name: String,
+    landlord_email: String,
+    landlord_username: String,
+    landlord_password: String,
+    landlord_phone_number: Number,
+    tenant_name: String,
+    tenant_email: String,
+    tenant_username: String,
+    tenant_password: String,
+    tenant_phone_number: Number,
     
-    appliance_ids: [String],
-
-    rent_ids: [String],
+    appliance1_name: String,
+    appliance1_image: String,
+    appliance1_status: String,
+    rent_date: String,
+    landlord_status: String,
+    tenant_status: String,
+    repairDesc:String
 });
 
 

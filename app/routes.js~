@@ -14,15 +14,47 @@ module.exports = function(app) {
 	
 	//Get All	
 	app.get('/api/properties', function(req, res) {
-
-		Unit.find({}).exec(function(err, units) {
-		if (err)
-		        res.send(err)
-
+		console.log("here");
+		Unit.findOne({}).exec(function(err, units) {
+			if (err) {
+	        	res.send(err);
+			}
 		    res.json(units); // return all todos in JSON format
 		});
 
-    	});
+    });
+
+	//update Appliance status
+    app.get('/api/properties/update', function(req, res) {
+		console.log("here1");
+		console.log(req.query.repairDesc);
+		Unit.update({code: req.query.app_code} , { $set: {"repairDesc": req.query.repairDesc, "appliance1_status": "Needs Repairs" } }, {upsert: true}).exec(function(err,units) {
+			if (err) {
+	        	console.log(err);
+			}
+			else {
+				res.send("Hello");
+			}
+		  
+		});
+	    
+		
+    });
+
+    //update Appliance status
+    app.get('/api/properties/fix', function(req, res) {
+		Unit.update({code: req.query.app_code} , { $set: {"repairDesc": "", "appliance1_status": "Good" } }, {upsert: true}).exec(function(err,units) {
+			if (err) {
+	        	console.log(err);
+			}
+			else {
+				res.send("Hello");
+			}
+		  
+		});
+	    
+		
+    });
 	/*app.get('/api/todos', function(req, res) {
 
 		Todo.find(function(err, todos) {
