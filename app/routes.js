@@ -1,8 +1,4 @@
-var Property = require('./models/Property');
-var User = require('./models/Users');
-var Rent = require('./models/Rent');
-var Appliance = require('./models/Appliance');
-var Unit = require('./models/Unit');
+var models = require('./models');
 //var Todo = require('./models/Todo');
 
 module.exports = function(app) {
@@ -12,30 +8,39 @@ module.exports = function(app) {
 
 // api calls ===========================================================
 	
-	//Get All	
-	app.get('/api/properties', function(req, res) {
-		console.log("here");
-		Unit.findOne({}).exec(function(err, units) {
-			if (err) {
-	        	res.send(err);
+	app.get('/login', function(req, res) {
+		console.log(req.query);
+		models.User.findOne({
+			where: {
+						username: req.query.user, 
+						password: req.query.pass
 			}
-		    res.json(units); // return all todos in JSON format
-		});
+		}).then(function(user) {
+			console.log(user);
 
-    });
+			if(user == null) {
+				res.send("Err");
+			}
+			else {
+				res.send(user);
+			}
+		});
+	});
 
 	//update Appliance status
     app.get('/api/properties/update', function(req, res) {
 		console.log("here1");
 		console.log(req.query.repairDesc);
-		Unit.update({code: req.query.app_code} , { $set: {"repairDesc": req.query.repairDesc, "appliance1_status": "Needs Repairs" } }, {upsert: true}).exec(function(err,units) {
-			if (err) {
-	        	console.log(err);
+		models.Appliance.findOne({
+			where: {id: parseInt(req.query.userID)}
+		}).then(function(employee) {
+			console.log(employee);
+			if(employee == null) {
+				res.send("Not found");
 			}
 			else {
-				res.send("Hello");
+				res.send(employee.dataValues);
 			}
-		  
 		});
 	    
 		
@@ -43,7 +48,7 @@ module.exports = function(app) {
 
     //update Appliance status
     app.get('/api/properties/fix', function(req, res) {
-		Unit.update({code: req.query.app_code} , { $set: {"repairDesc": "", "appliance1_status": "Good" } }, {upsert: true}).exec(function(err,units) {
+		models.Unit.update({code: req.query.app_code} , { $set: {"repairDesc": "", "appliance1_status": "Good" } }, {upsert: true}).exec(function(err,units) {
 			if (err) {
 	        	console.log(err);
 			}

@@ -1,11 +1,14 @@
-angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', function($scope, LoginService) {
+angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', function($scope, $location, LoginService) {
         
+    $scope.username = '';
+    $scope.password = '';
+
     $scope.formSubmit = function() {
         if(LoginService.login($scope.username, $scope.password)){
             $scope.error = '';
             $scope.username = '';
             $scope.password = '';
-            window.location = "/landlord";
+            $location.href = "/landlord";
         }
         else {
             $scope.error = "Incorrect username or password!";   
