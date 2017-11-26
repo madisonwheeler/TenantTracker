@@ -2,7 +2,7 @@ angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', fu
         
     $scope.username = '';
     $scope.password = '';
-
+	// checks for correct login using the login service
     $scope.formSubmit = function() {
         if(LoginService.login($scope.username, $scope.password)){
             $scope.error = '';
