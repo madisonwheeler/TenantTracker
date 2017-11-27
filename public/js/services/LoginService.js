@@ -1,24 +1,19 @@
 angular.module('LoginService', []).factory('LoginService' , function($http) {
 	var currUser = null;
-	var isAuth = false;
+	var isAuth = true;
 	// authenitcates login creditials
 	return {
-		login : function(username, password) { 
-			$http({url: '/login', method: "GET", params: {"user": username, "pass": password}}).then(function(response) {
-				console.log(response);
-				console.log(response.data);
-				if(response.data != "Err") {
-   					console.log("here");
-    				currUser = response.data;
-    				isAuth = true;
-				}
-				else {
-    				isAuth = false;
-				}
-			});
+		login : function(username, password) {
+			// console.log($http({url:'/api/login', method:"POST", data: {"username" : username, "password": password}}));
 
+			$http({url:'/api/login', method:'POST', data: {'username': username, 'password' : password}})
+				.then(function(response) {
+					console.log('success');
+					console.log(response);
+					isAuth = true;
+					return "success1";
+				});
 		},
-
 		getUser : function() {
 			return currUser;
 		},
@@ -27,5 +22,5 @@ angular.module('LoginService', []).factory('LoginService' , function($http) {
 			return isAuth;
 		}
 
-	}; 
+	};
 });
