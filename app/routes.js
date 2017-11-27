@@ -1,6 +1,8 @@
 var models = require('./models');
 //var Todo = require('./models/Todo');
 
+//var nodemailer = require('nodemailer');
+//var transporter = nodemailer.createTransport(transport[, defaults]);
 module.exports = function(app) {
 
 // server routes ===========================================================
@@ -60,6 +62,17 @@ module.exports = function(app) {
 	    
 		
     });
+    // mail for appliance change
+    /*app.post('/api/appliance/mail', function(req, res) {
+		
+	    transporter.sendMail({
+		    from: 'eblossom24@aol.com',
+		    to: 'eblossom24@aol.com',
+		    subject: 'Tenant Tracker: Appliance Change' ,
+		    text: 'An appliance status has been changed. Please login for more information'
+    	}); 
+		
+    });*/
 	/*app.get('/api/todos', function(req, res) {
 
 		Todo.find(function(err, todos) {

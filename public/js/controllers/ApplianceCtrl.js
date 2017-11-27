@@ -49,6 +49,10 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 			$scope.successMsg = true;
 			//$scope.$apply();
 		});
+	// email code
+	/*$http({url: '/api/appliance/mail', method: "POST", params:{}}).then(function(response) {
+	console.log('mail sent');
+		});*/
 		
 	// fixes the repair
 	$scope.needsRepair = function() {
