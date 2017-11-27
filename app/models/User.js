@@ -1,5 +1,5 @@
 /* jshint indent: 1 */
-
+//User database table
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('User', {
 		id: {
