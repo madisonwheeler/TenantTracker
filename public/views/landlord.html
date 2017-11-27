@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
-		<a class="navbar-brand" href="#">Tenant Tracker</a>
+		<a class="navbar-brand" href="/">Tenant Tracker</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -13,7 +13,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/appliances">Appliances</a>
+					<a class="nav-link" href="#" ng-click="toAppPage()">Appliances</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/rent">Rent History</a>
@@ -36,48 +36,17 @@
 				<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
-						<a href="#">Property 1</a>
+						<a href="#">{{ property.address }}</a>
 					</h4>
-					<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+					<p class="card-text">Tenants</p>
+					<ul>
+						<li ng-repeat="x in property.tenants">{{x.name}}</li>
+					</ul>
+					<p class="card-text">Number of Appliances: {{property.applianceCount}}</p>
 				</div>
 			</div>
 		</div>
 		
-		<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-			<div class="card h-100">
-				<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<a href="#">Property 2</a>
-					</h4>
-					<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-			<div class="card h-100">
-				<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<a href="#">Property 3</a>
-					</h4>
-					<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-			<div class="card h-100">
-				<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-				<div class="card-body">
-					<h4 class="card-title">
-						<a href="#">Property 4</a>
-					</h4>
-					<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-				</div>
-			</div>
-		</div>
 		
 	</div>
 </div>

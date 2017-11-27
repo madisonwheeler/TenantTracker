@@ -1,21 +1,24 @@
-angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', function($scope, $location, LoginService) {
+angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', function($rootScope, $scope, $http, $location, LoginService) {
 
     $scope.username = '';
     $scope.password = '';
+    $rootScope.currentUser = null;
 	// checks for correct login using the login service
     $scope.formSubmit = function() {
-      LoginService.login($scope.username, $scope.password).then(function cb(result) {
-        if(result){
-          console.log('successful login');
-          $scope.error = '';
-          $scope.username = '';
-          $scope.password = '';
-          // $location.href = "/landlord";
-          window.location = "/landlord";
-        }
-        else {
-          $scope.error = "Incorrect username or password.";
-        }
-      });
+        console.log(LoginService.login($scope.username, $scope.password));
+        $http({url:'/api/login', method:'POST', data: {'username': $scope.username, 'password' : $scope.password}}).then(function(response) {
+            console.log(response);
+            if(response.data.message == "success"){
+                $rootScope.currentUser = response.data.user;
+                console.log('successful login');
+                $scope.error = '';
+                $scope.username = '';
+                $scope.password = '';
+                $location.path("/landlord");
+            }
+            else {
+                $scope.error = "Incorrect username or password!";
+            }
+        });
     };
 })
