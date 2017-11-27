@@ -1,5 +1,5 @@
 /* jshint indent: 1 */
-
+// Rent database table
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('Rent', {
 		id: {
