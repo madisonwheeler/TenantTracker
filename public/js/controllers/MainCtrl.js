@@ -1,13 +1,11 @@
 angular.module('MainCtrl', []).controller('MainController', function($scope) {
-
-	$scope.tagline = 'I got this Sh**t to work!!!!';
-
+	// go to landlord login page
 	$scope.clickedLandlord = function(){
-       window.location = "/landlord";
+       window.location = "/landlordLogin";
    	}
-
+	// go to tenant login page
    	$scope.clickedTenant = function(){
-   		window.location = "/tenant";
+   		window.location = "/tenantLogin";
    	}
 
 });

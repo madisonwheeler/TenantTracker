@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang=en>
 <body id="page-top">
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
@@ -32,28 +33,38 @@
 				<div class="col-lg-8 mx-auto">
 					<br>
 					<br>
-					<h1 class="brand-heading">Tenant Tracker</h1>
-					<p class="intro-text">The app to improve Tenant Landlord Communication (TLC).</p>
+						<!-- Tenant Login Form -->
+						<div>
+							<h3>Tenant Login</h3>
+							<form ng-submit="formSubmit()" class="form">
+								<div>
+									<div class="form-group">
+										<input type="text" class="form-control" ng-model="username" placeholder="username" required=""/>
+									</div>
+									<div class="form-group">
+										<input type="password" class="form-control" ng-model="password" placeholder="password" required=""/>
+									</div>
 
-					<ul class="list-inline banner-login-buttons">
-						<li class="list-inline-item">
-							<a ng-click="clickedLandlord()" class="btn btn-default btn-lg">Landlord Login</a> 
-						</li>
-						<li class="list-inline-item">
-							<a ng-click="clickedTenant()" class="btn btn-default btn-lg">Tenant Login</a>
-						</li>
-					</ul>
+									<div class="form-group">
+										<button type="submit" class="btn btn-success">Login</button>
+										<span class="text-danger">{{ error }}</span>
+									</div>       
+								</div>
+							</form>
+						</div>  
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 	<!-- Footer -->
 	<footer class="py-5 bg-dark fixed-bottom">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-		</div>
+	<div class="container">
+	<p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+	</div>
+	<!-- /.container -->
 	</footer>
 
 </body>
+
 </html>

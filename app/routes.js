@@ -1,26 +1,181 @@
-var Property = require('./models/Property');
-var User = require('./models/Users');
-var Todo = require('./models/Todo');
+var models = require('./models');
+//var Todo = require('./models/Todo');
 
 module.exports = function(app) {
 
 // server routes ===========================================================
-	
+
 
 // api calls ===========================================================
-	
-	//Get All	
-	/*app.get('/api/properties', function(req, res) {
 
-		Property.find(function(err, properties) {
-		    if (err)
-		        res.send(err)
+	app.post('/api/login', function(req, res) {
+		console.log('attempt api login call with: '+ req.body);
+		if(!(req.body.username || req.body.password)) {
+			res.status(404).json({message: 'Username and password are required!'});
+		}
+		else {
+			var user = req.body.username;
+			var password = req.body.password;
+			var potentialUser = {where: {username: user}};
 
-		    res.json(properties); // return all todos in JSON format
+			models.User.findOne(potentialUser).then( function(user) {
+				if(!user) {
+					res.send({message: 'Incorrect username'});
+				}
+				else {
+					if(user.password == password) {
+						res.send({user: user, message: "success"});
+					}
+					else {
+						res.send({message: 'Incorrect password.'});
+					}
+				}
+			});
+		}
+	});
+
+
+	//get all appliance for that property
+    app.get('/api/appliance', function(req, res) {
+		models.Appliance.findAll({
+			where: {property_id: parseInt(req.query.property_id)}
+		}).then(function(appliances) {
+			//console.log(appliances);
+			if(appliances == null) {
+				res.send("Not found");
+			}
+			else {
+				res.send(appliances);
+			}
 		});
 
-    	});*/
-	app.get('/api/todos', function(req, res) {
+    });
+
+	//update Appliance status to "Needs Repair"
+    app.get('/api/appliance/update', function(req, res) {
+		console.log("here1");
+		console.log(req.query.repairDesc);
+		models.Appliance.findOne({
+			where: {id: parseInt(req.query.appliance_id)}
+		}).then(function(appliance) {
+			appliance.repair_desc = req.query.repairDesc;
+			appliance.status = "Needs Repair";
+			appliance.save();
+			res.send("Success");
+		});
+
+
+    });
+
+    //update Appliance status to "Good"
+    app.get('/api/appliance/fix', function(req, res) {
+		models.Appliance.findOne({
+			where: {id: parseInt(req.query.appliance_id)}
+		}).then(function(appliance) {
+			appliance.repairDesc = "";
+			appliance.status = "Good";
+			appliance.save();
+			res.send("Success");
+		});
+
+
+    });
+
+
+
+    //landlord page routes
+
+
+    //get property
+    app.post('/api/landlord/property',function(req, res) {
+    	models.Property.findOne({where: {landlord_id: req.body.landlord_id} }).then(function(property) {
+    		if(property != null) {
+    			res.send(property);
+    		}
+    	});
+    });
+
+    //get property
+    app.post('/api/landlord/tenants',function(req, res) {
+    	models.User.findAll({where: {landlord_id: req.body.landlord_id} }).then(function(tenants) {
+    		if(tenants != null) {
+    			res.send(tenants);
+    		}
+    	});
+    });
+
+    //get property
+    app.post('/api/landlord/applianceCount',function(req, res) {
+    	models.Appliance.findAll({where: {property_id: req.body.property_id} }).then(function(appliances) {
+    		if(appliances != null) {
+    			res.send(appliances.length);
+    		}
+    	});
+    });
+
+		//tenant page routes
+		app.post('/api/tenant/property', function(req, res) {
+			console.log('call to api/ten/prop');
+			models.Property.findOne({where: {id: req.body.property_id} }).then(function(property){
+				console.log('findOne Property' + property.address);
+				if(property != null){
+					res.send(property);
+				}
+			});
+		});
+
+		api.post('/api/tenant/landlord', function(req, res){
+			console.log('call to api/ten/land');
+			models.Landlord.findOne({where: {id: req.body.landlord_id}).then(function(landlord) {
+				console.log('findOne Property ' + landlord.name);
+				if(landlord != null){
+					res.send(landlord);
+				}
+			});
+		});
+
+    //rent page routes
+
+    //get all rent history
+    app.post('/api/rent', function(req, res) {
+    	console.log("Here");
+    	console.log(req.body.property_id);
+    	models.Rent.findAll({where: { property_id: req.body.property_id }}).then(function(rents) {
+    		console.log(rents);
+    		if(rents != null) {
+    			res.send(rents);
+    		}
+    	});
+    });
+
+    //update Tenant Status
+    app.post('/api/rent/send', function(req, res) {
+    	console.log("Here");
+    	console.log(req.body.property_id);
+    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
+    		if(rent != null) {
+    			rent.tenant_status = "Sent";
+    			rent.save();
+    			res.send(rent);
+    		}
+    	});
+    });
+
+
+    //update Landlord Status
+    app.post('/api/rent/receive', function(req, res) {
+    	console.log("Here");
+    	console.log(req.body.property_id);
+    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
+    		if(rent != null) {
+    			rent.landlord_status = "Received";
+    			rent.save();
+    			res.send(rent);
+    		}
+    	});
+    });
+
+	/*app.get('/api/todos', function(req, res) {
 
 		Todo.find(function(err, todos) {
 		    if (err)
@@ -29,15 +184,15 @@ module.exports = function(app) {
 		    res.json(todos); // return all todos in JSON format
 		});
 
-    	});
-	
+    	});*/
+
 
 	// Create
-	
+
 	// Update
 
-    	// Delete 
-    	
+    	// Delete
+
 
 
 

@@ -1,17 +1,31 @@
-var mongoose = require('mongoose');
+/* jshint indent: 1 */
 
-var rentPaymentSchema = new mongoose.Schema({
-    
-        name:  { type: String },
-        date: { type: Number },
-        tenant_status: { 
-			type: String,
-			Enum: ["Sent", "Not Sent"]
+module.exports = function(sequelize, DataTypes) {
+	return sequelize.define('Rent', {
+		id: {
+			type: DataTypes.INTEGER(11),
+			allowNull: false,
+			primaryKey: true,
+			autoIncrement: true
 		},
-		landlord_status: { 
-			type: String,
-			Enum: ["Received", "Not Received"]
+		date: {
+			type: DataTypes.DATE,
+			allowNull: false
+		},
+		landlord_status: {
+			type: DataTypes.STRING(45),
+			allowNull: false
+		},
+		tenant_status: {
+			type: DataTypes.STRING(45),
+			allowNull: false
+		},
+		property_id: {
+			type: DataTypes.INTEGER(11),
+			allowNull: false
 		}
-    });
-
-module.exports = mongoose.model('Rent', rentPaymentSchema);
+	}, {
+		tableName: 'Rent',
+		timestamps: false
+	});
+};
