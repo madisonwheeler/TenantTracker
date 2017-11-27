@@ -1,5 +1,6 @@
 /* jshint indent: 1 */
 
+// Appliance database table
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('Appliance', {
 		id: {
