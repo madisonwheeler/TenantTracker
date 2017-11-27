@@ -31,14 +31,14 @@
 	<!-- Property Cards-->
 	<div class="row">
   		<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-    		<div class="card h-100" ng-repeat="appliance in appliances">
+    		<div class="card h-100">
         		<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
        				<div class="card-body">
           				<h4 class="card-title">
-            				<a href="#">{{appliance.name}}</a>
+            				<a href="#">{{appliances[0].name}}</a>
           				</h4>
-						<p>Status: {{appliance.status}}</p>
-						<p>Description: {{appliance.repairDesc}}</p>
+						<p>Status: {{appliances[0].status}}</p>
+						<p>Description: {{appliances[0].repair_desc}}</p>
 						<button class="btn btn-primary" ng-click="requestRepair()" ng-show="reqRepairButton">Request Repairs</button>
 						<button class="btn btn-danger" ng-click="needsRepair()" ng-show="needsRepairButton">Needs Repairs</button>
 						<div class="form-group" ng-show="repairRequested">

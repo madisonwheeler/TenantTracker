@@ -40,7 +40,7 @@ module.exports = function(app) {
 		models.Appliance.findAll({
 			where: {property_id: parseInt(req.query.property_id)}
 		}).then(function(appliances) {
-			console.log(appliances);
+			//console.log(appliances);
 			if(appliances == null) {
 				res.send("Not found");
 			}
@@ -51,22 +51,23 @@ module.exports = function(app) {
 
     });
 
-	//update Appliance status
+	//update Appliance status to "Needs Repair"
     app.get('/api/appliance/update', function(req, res) {
 		console.log("here1");
 		console.log(req.query.repairDesc);
 		models.Appliance.findOne({
 			where: {id: parseInt(req.query.appliance_id)}
 		}).then(function(appliance) {
-			appliance.repairDesc = req.query.repairDesc;
+			appliance.repair_desc = req.query.repairDesc;
 			appliance.status = "Needs Repair";
 			appliance.save();
+			res.send("Success");
 		});
 
 
     });
 
-    //update Appliance status
+    //update Appliance status to "Good"
     app.get('/api/appliance/fix', function(req, res) {
 		models.Appliance.findOne({
 			where: {id: parseInt(req.query.appliance_id)}
@@ -74,7 +75,7 @@ module.exports = function(app) {
 			appliance.repairDesc = "";
 			appliance.status = "Good";
 			appliance.save();
-
+			res.send("Success");
 		});
 
 

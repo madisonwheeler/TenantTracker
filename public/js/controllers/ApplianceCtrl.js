@@ -33,7 +33,7 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 		$scope.repairRequested = true;
 		$scope.reqRepairButton = false;
 		$scope.successMsg = false;
-	}
+	};
 
 	// Sends form data entered after requesting repair to db
 	$scope.submitRepair = function() {
@@ -45,16 +45,18 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 			$scope.successMsg = true;
 			//$scope.$apply();
 		});
+	};
 		
 	// fixes the repair
 	$scope.needsRepair = function() {
+		console.log("Here");
 		$http({url: '/api/appliance/fix', method: "GET", params: {"appliance_id": 1}}).then(function(response) {
+			console.log("Here2");
 			$scope.loadAppliances();
 			$scope.reqRepairButton = true;
 			$scope.needsRepairButton = false;
 			$scope.successMsg = true;
 		});
-	}
-	}
+	};
 
 });
