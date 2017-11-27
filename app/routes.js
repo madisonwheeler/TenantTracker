@@ -14,20 +14,20 @@ module.exports = function(app) {
 			res.status(404).json({message: 'Username and password are required!'});
 		}
 		else {
-			var username = req.body.username;
+			var user = req.body.username;
 			var password = req.body.password;
-			var potentialUser = {where: {username: username}};
+			var potentialUser = {where: {username: user}};
 
 			models.User.findOne(potentialUser).then( function(user) {
 				if(!user) {
-					res.status(404).json({message: 'Authentication failed.'});
+					res.send({message: 'Incorrect username'});
 				}
 				else {
-					if(user.password === password) {
-						res.status(200).json({message: 'Successfully authenticated.'});
+					if(user.password == password) {
+						res.send({user: user, message: "success"});
 					}
 					else {
-						res.status(403).json({message: 'Incorrect password.'});
+						res.send({message: 'Incorrect password.'});
 					}
 				}
 			});
