@@ -1,5 +1,5 @@
 /* jshint indent: 1 */
-
+// Property database table
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('Property', {
 		id: {
