@@ -124,15 +124,6 @@ module.exports = function(app) {
 			});
 		});
 
-		api.post('/api/tenant/landlord', function(req, res){
-			console.log('call to api/ten/land');
-			models.Landlord.findOne({where: {id: req.body.landlord_id}).then(function(landlord) {
-				console.log('findOne Property ' + landlord.name);
-				if(landlord != null){
-					res.send(landlord);
-				}
-			});
-		});
 
     //rent page routes
 

@@ -1,11 +1,13 @@
-angular.module('LandlordCtrl', []).controller('LandlordController', function($rootScope, $scope, $http, $location) {
-
+angular.module('LandlordCtrl', []).controller('LandlordController', function($rootScope, $scope, $http, $location, $sessionStorage) {
 	$scope.tagline = 'Welcome Landlord!';
 	$scope.clickedHome = function(){
 		window.location = "/";
 	}
 
 	$scope.property = {};
+
+	console.log(http({url:'/api/landlord/tenants', method:'POST', data: {'landlord_id': $sessionStorage.currentUser.id}}));
+
 
 	$http({url:'/api/landlord/tenants', method:'POST', data: {'landlord_id': $rootScope.currentUser.id}}).then(function(response) {
     	console.log("Tenants: ");
@@ -35,5 +37,5 @@ angular.module('LandlordCtrl', []).controller('LandlordController', function($ro
     $scope.toAppPage = function() {
     	$location.path("/appliances");
     }
-    
+
 });

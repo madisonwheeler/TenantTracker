@@ -1,4 +1,4 @@
-angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', function($rootScope, $scope, $http, $location, LoginService) {
+angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', function($rootScope, $scope, $http, $location, $cookieStore, LoginService) {
 
     $scope.username = '';
     $scope.password = '';
@@ -9,6 +9,8 @@ angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', fu
         $http({url:'/api/login', method:'POST', data: {'username': $scope.username, 'password' : $scope.password}}).then(function(response) {
             console.log(response);
             if(response.data.message == "success"){
+                // $sessionStorage.currentUser = response.data.user;
+                $cookieStore.put('currentUser', response.data.user);
                 $rootScope.currentUser = response.data.user;
                 console.log('successful login');
                 $scope.error = '';
