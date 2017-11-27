@@ -6,14 +6,14 @@ angular.module('LoginService', []).factory('LoginService' , function($http) {
 		login : function(username, password) {
 			// console.log($http({url:'/api/login', method:"POST", data: {"username" : username, "password": password}}));
 
-			$http({url:'/api/login', method:'POST', data: {'username': username, 'password' : password}})
+			return $http({url:'/api/login', method:'POST', data: {'username': username, 'password' : password}})
 				.then(function successCB(response) {
-					console.log('success ' + response)
+					console.log('success ' + response.data)
 					isAuth = true;
 					return isAuth;
 				},
 				function errorCB(response) {
-					console.log('error ' + response);
+					console.log('error ' + response.data);
 					isAuth = false;
 					return isAuth;
 				});
