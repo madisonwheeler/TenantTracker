@@ -26,20 +26,23 @@
 <!-- Page Content -->
 <div class="container" ng-controller="RentController" ng-init="loadRentTable()">
 
-	<!--Send Rent button-->
-	<button class="btn btn-primary" ng-click="sendRent()">Send Rent</button>
-
 	<!--Rent History Table -->
-	<table class="table table-hover">
+	<table class = "table">
 		<tr>
 			<th>Date</th>
 			<th>Tenant</th>
 			<th>Landlord</th>
 		</tr>
-		<tr ng-repeat="r in sampleRentHistory">
+		<tr ng-repeat="r in rentHistory">
 			<td>{{r.date}}</td>
-			<td>{{r.tenant_Status}}</td>
-			<td>{{r.landlord_Status}}</td>
+			<td>
+				<button ng-if="r.tenant_status == 'Not Sent'" class="btn btn-danger" ng-click="sendRent($event)" value="{{r.id}}">Not Sent</button>
+				<button ng-if="r.tenant_status == 'Sent'" class="btn btn-success" value="r.id">Sent</button>
+			</td>
+			<td>
+				<button ng-if="r.landlord_status == 'Not Received'" class="btn btn-danger" ng-click="receiveRent($event)" value="{{r.id}}">Not Received</button>
+				<button ng-if="r.landlord_status == 'Received'" class="btn btn-success" value="r.id">Received</button>
+			</td>
 		</tr>
 	</table>	
 </div>

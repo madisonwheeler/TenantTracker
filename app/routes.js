@@ -115,6 +115,67 @@ module.exports = function(app) {
     	});
     });
 
+		//tenant page routes
+		app.post('/api/tenant/property', function(req, res) {
+			console.log('call to api/ten/prop');
+			models.Property.findOne({where: {id: req.body.property_id} }).then(function(property){
+				console.log('findOne Property' + property.address);
+				if(property != null){
+					res.send(property);
+				}
+			});
+		});
+
+		api.post('/api/tenant/landlord', function(req, res){
+			console.log('call to api/ten/land');
+			models.Landlord.findOne({where: {id: req.body.landlord_id}).then(function(landlord) {
+				console.log('findOne Property ' + landlord.name);
+				if(landlord != null){
+					res.send(landlord);
+				}
+			});
+		});
+
+    //rent page routes
+
+    //get all rent history
+    app.post('/api/rent', function(req, res) {
+    	console.log("Here");
+    	console.log(req.body.property_id);
+    	models.Rent.findAll({where: { property_id: req.body.property_id }}).then(function(rents) {
+    		console.log(rents);
+    		if(rents != null) {
+    			res.send(rents);
+    		}
+    	});
+    });
+
+    //update Tenant Status
+    app.post('/api/rent/send', function(req, res) {
+    	console.log("Here");
+    	console.log(req.body.property_id);
+    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
+    		if(rent != null) {
+    			rent.tenant_status = "Sent";
+    			rent.save();
+    			res.send(rent);
+    		}
+    	});
+    });
+
+
+    //update Landlord Status
+    app.post('/api/rent/receive', function(req, res) {
+    	console.log("Here");
+    	console.log(req.body.property_id);
+    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
+    		if(rent != null) {
+    			rent.landlord_status = "Received";
+    			rent.save();
+    			res.send(rent);
+    		}
+    	});
+    });
 
 
 	/*app.get('/api/todos', function(req, res) {
