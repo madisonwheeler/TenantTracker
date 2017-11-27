@@ -4,28 +4,36 @@ var models = require('./models');
 module.exports = function(app) {
 
 // server routes ===========================================================
-	
+
 
 // api calls ===========================================================
-	
-	app.get('/login', function(req, res) {
-		console.log(req.query);
-		models.User.findOne({
-			where: {
-						username: req.query.user, 
-						password: req.query.pass
-			}
-		}).then(function(user) {
-			console.log(user);
 
-			if(user == null) {
-				res.send("Err");
-			}
-			else {
-				res.send(user);
-			}
-		});
+	app.post('/api/login', function(req, res) {
+		console.log('attempt api login call with: '+ req.body);
+		if(!(req.body.username || req.body.password)) {
+			res.status(404).json({message: 'Username and password are required!'});
+		}
+		else {
+			var username = req.body.username;
+			var password = req.body.password;
+			var potentialUser = {where: {username: username}};
+
+			models.User.findOne(potentialUser).then( function(user) {
+				if(!user) {
+					res.status(404).json({message: 'Authentication failed.'});
+				}
+				else {
+					if(user.password === password) {
+						res.status(200).json({message: 'Successfully authenticated.'});
+					}
+					else {
+						res.status(403).json({message: 'Incorrect password.'});
+					}
+				}
+			});
+		}
 	});
+
 
 	//update Appliance status
     app.get('/api/properties/update', function(req, res) {
@@ -42,8 +50,8 @@ module.exports = function(app) {
 				res.send(employee.dataValues);
 			}
 		});
-	    
-		
+
+
     });
 
     //update Appliance status
@@ -55,10 +63,10 @@ module.exports = function(app) {
 			else {
 				res.send("Hello");
 			}
-		  
+
 		});
-	    
-		
+
+
     });
 	/*app.get('/api/todos', function(req, res) {
 
@@ -70,14 +78,14 @@ module.exports = function(app) {
 		});
 
     	});*/
-	
+
 
 	// Create
-	
+
 	// Update
 
-    	// Delete 
-    	
+    	// Delete
+
 
 
 
