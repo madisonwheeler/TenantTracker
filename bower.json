@@ -5,6 +5,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "jquery": "^3.2.1",
-    "bootstrap": "v4.0.0-beta"
+    "bootstrap": "v4.0.0-beta",
+    "ngstore":"latest"
   }
 }

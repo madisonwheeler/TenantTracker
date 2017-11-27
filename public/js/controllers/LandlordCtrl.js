@@ -1,4 +1,4 @@
-angular.module('LandlordCtrl', []).controller('LandlordController', function($rootScope, $scope, $http, $location, $sessionStorage) {
+angular.module('LandlordCtrl', []).controller('LandlordController', function($rootScope, $scope, $http, $location) {
 	$scope.tagline = 'Welcome Landlord!';
 	$scope.clickedHome = function(){
 		window.location = "/";
@@ -6,7 +6,7 @@ angular.module('LandlordCtrl', []).controller('LandlordController', function($ro
 
 	$scope.property = {};
 
-	console.log(http({url:'/api/landlord/tenants', method:'POST', data: {'landlord_id': $sessionStorage.currentUser.id}}));
+	// console.log(http({url:'/api/landlord/tenants', method:'POST', data: {'landlord_id': $sessionStorage.currentUser.id}}));
 
 
 	$http({url:'/api/landlord/tenants', method:'POST', data: {'landlord_id': $rootScope.currentUser.id}}).then(function(response) {
