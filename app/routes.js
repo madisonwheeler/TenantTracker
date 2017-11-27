@@ -134,6 +134,47 @@ module.exports = function(app) {
 			});
 		});
 
+    //rent page routes
+
+    //get all rent history
+    app.post('/api/rent', function(req, res) {
+    	console.log("Here");
+    	console.log(req.body.property_id);
+    	models.Rent.findAll({where: { property_id: req.body.property_id }}).then(function(rents) {
+    		console.log(rents);
+    		if(rents != null) {
+    			res.send(rents);
+    		}
+    	});
+    });
+
+    //update Tenant Status
+    app.post('/api/rent/send', function(req, res) {
+    	console.log("Here");
+    	console.log(req.body.property_id);
+    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
+    		if(rent != null) {
+    			rent.tenant_status = "Sent";
+    			rent.save();
+    			res.send(rent);
+    		}
+    	});
+    });
+
+
+    //update Landlord Status
+    app.post('/api/rent/receive', function(req, res) {
+    	console.log("Here");
+    	console.log(req.body.property_id);
+    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
+    		if(rent != null) {
+    			rent.landlord_status = "Received";
+    			rent.save();
+    			res.send(rent);
+    		}
+    	});
+    });
+
 	/*app.get('/api/todos', function(req, res) {
 
 		Todo.find(function(err, todos) {
