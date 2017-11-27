@@ -74,7 +74,7 @@ module.exports = function(app) {
 		models.Appliance.findOne({
 			where: {id: parseInt(req.query.appliance_id)}
 		}).then(function(appliance) {
-			appliance.repairDesc = "";
+			appliance.repair_desc = "";
 			appliance.status = "Good";
 			appliance.save();
 			res.send("Success");
@@ -115,27 +115,27 @@ module.exports = function(app) {
     	});
     });
 
-		//tenant page routes
-		app.post('/api/tenant/property', function(req, res) {
-			console.log('call to api/ten/prop');
-			models.Property.findOne({where: {id: req.body.property_id} }).then(function(property){
-				console.log('findOne Property' + property.address);
-				if(property != null){
-					res.send(property);
-				}
-			});
+	//tenant page routes
+	app.post('/api/tenant/property', function(req, res) {
+		console.log('call to api/ten/prop');
+		models.Property.findOne({where: {id: req.body.property_id} }).then(function(property){
+			console.log('findOne Property' + property.address);
+			if(property != null){
+				res.send(property);
+			}
 		});
+	});
 
 
-		app.post('/api/tenant/landlord', function(req, res){
-			console.log('call to api/ten/land');
-			models.User.findOne({where: {id: req.body.landlord_id}}).then(function(landlord) {
-				console.log('findOne landlord ' + landlord.name);
-				if(landlord != null){
-					res.send(landlord);
-				}
-			});
+	app.post('/api/tenant/landlord', function(req, res){
+		console.log('call to api/ten/land');
+		models.User.findOne({where: {id: req.body.landlord_id}}).then(function(landlord) {
+			console.log('findOne landlord ' + landlord.name);
+			if(landlord != null){
+				res.send(landlord);
+			}
 		});
+	});
 
     //rent page routes
 

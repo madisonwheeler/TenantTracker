@@ -6,6 +6,6 @@
     "angular-route": "latest",
     "jquery": "^3.2.1",
     "bootstrap": "v4.0.0-beta",
-    "ngstorage": "latest"
+    "ngstorage": "^0.3.11",
   }
 }
