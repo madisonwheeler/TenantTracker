@@ -11,7 +11,6 @@ angular.module('TenantCtrl', []).controller('TenantController', function($rootSc
 		}
 	});
 	
-	
 	$http({url: '/api/tenant/landlord', method:'POST', data: {'landlord_id': $rootScope.currentUser.landlord_id}}).then(function(response) {
 		console.log("Landlord " + response);
 		if(response.data != null){
