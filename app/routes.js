@@ -113,6 +113,26 @@ module.exports = function(app) {
     	});
     });
 
+		//tenant page routes
+		app.post('/api/tenant/property', function(req, res) {
+			console.log('call to api/ten/prop');
+			models.Property.findOne({where: {id: req.body.property_id} }).then(function(property){
+				console.log('findOne Property' + property.address);
+				if(property != null){
+					res.send(property);
+				}
+			});
+		});
+
+		api.post('/api/tenant/landlord', function(req, res){
+			console.log('call to api/ten/land');
+			models.Landlord.findOne({where: {id: req.body.landlord_id}).then(function(landlord) {
+				console.log('findOne Property ' + landlord.name);
+				if(landlord != null){
+					res.send(landlord);
+				}
+			});
+		});
 
 	/*app.get('/api/todos', function(req, res) {
 
