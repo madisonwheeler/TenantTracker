@@ -1,4 +1,4 @@
-angular.module('TenantLoginCtrl', []).controller('TenantLoginController', function($rootScope, $scope, $http, $location, LoginService) {
+angular.module('TenantLoginCtrl', []).controller('TenantLoginController', function($rootScope, $scope, $http, $location, $sessionStorage, LoginService) {
 
 	$scope.username = "";
 	$scope.password = "";
