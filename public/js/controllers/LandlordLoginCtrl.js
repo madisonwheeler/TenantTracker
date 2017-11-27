@@ -17,15 +17,5 @@ angular.module('LandlordLoginCtrl', []).controller('LandlordLoginController', fu
           $scope.error = "Incorrect username or password.";
         }
       });
-        // if(LoginService.login($scope.username, $scope.password)){
-        //   console.log('successful login');
-        //     $scope.error = '';
-        //     $scope.username = '';
-        //     $scope.password = '';
-        //     $location.href = "/landlord";
-        // }
-        // else {
-        //     $scope.error = "Incorrect username or password!";
-        // }
     };
 })
