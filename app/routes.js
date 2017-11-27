@@ -126,8 +126,7 @@ module.exports = function(app) {
 			});
 		});
 
-<<<<<<< HEAD
-=======
+
 		app.post('/api/tenant/landlord', function(req, res){
 			console.log('call to api/ten/land');
 			models.User.findOne({where: {id: req.body.landlord_id}}).then(function(landlord) {
@@ -137,7 +136,6 @@ module.exports = function(app) {
 				}
 			});
 		});
->>>>>>> cf3fad9bf5107c4e8548ec755d2879ba25831c26
 
     //rent page routes
 
