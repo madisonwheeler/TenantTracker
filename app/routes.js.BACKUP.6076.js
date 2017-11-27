@@ -96,6 +96,19 @@ module.exports = function(app) {
     		}
     	});
     });
+<<<<<<< HEAD
+    // mail for appliance change
+    /*app.post('/api/appliance/mail', function(req, res) {
+		
+	    transporter.sendMail({
+		    from: 'eblossom24@aol.com',
+		    to: 'eblossom24@aol.com',
+		    subject: 'Tenant Tracker: Appliance Change' ,
+		    text: 'An appliance status has been changed. Please login for more information'
+    	}); 
+		
+    });*/
+=======
 
     //get property
     app.post('/api/landlord/tenants',function(req, res) {
@@ -115,72 +128,8 @@ module.exports = function(app) {
     	});
     });
 
-		//tenant page routes
-		app.post('/api/tenant/property', function(req, res) {
-			console.log('call to api/ten/prop');
-			models.Property.findOne({where: {id: req.body.property_id} }).then(function(property){
-				console.log('findOne Property' + property.address);
-				if(property != null){
-					res.send(property);
-				}
-			});
-		});
 
-<<<<<<< HEAD
-=======
-		app.post('/api/tenant/landlord', function(req, res){
-			console.log('call to api/ten/land');
-			models.Landlord.findOne({where: {id: req.body.landlord_id}}).then(function(landlord) {
-				console.log('findOne landlord ' + landlord.name);
-				if(landlord != null){
-					res.send(landlord);
-				}
-			});
-		});
->>>>>>> cf3fad9bf5107c4e8548ec755d2879ba25831c26
-
-    //rent page routes
-
-    //get all rent history
-    app.post('/api/rent', function(req, res) {
-    	console.log("Here");
-    	console.log(req.body.property_id);
-    	models.Rent.findAll({where: { property_id: req.body.property_id }}).then(function(rents) {
-    		console.log(rents);
-    		if(rents != null) {
-    			res.send(rents);
-    		}
-    	});
-    });
-
-    //update Tenant Status
-    app.post('/api/rent/send', function(req, res) {
-    	console.log("Here");
-    	console.log(req.body.property_id);
-    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
-    		if(rent != null) {
-    			rent.tenant_status = "Sent";
-    			rent.save();
-    			res.send(rent);
-    		}
-    	});
-    });
-
-
-    //update Landlord Status
-    app.post('/api/rent/receive', function(req, res) {
-    	console.log("Here");
-    	console.log(req.body.property_id);
-    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
-    		if(rent != null) {
-    			rent.landlord_status = "Received";
-    			rent.save();
-    			res.send(rent);
-    		}
-    	});
-    });
-
-
+>>>>>>> 82bfe21ba0d499b437130b47b10885f7a157c4d6
 	/*app.get('/api/todos', function(req, res) {
 
 		Todo.find(function(err, todos) {

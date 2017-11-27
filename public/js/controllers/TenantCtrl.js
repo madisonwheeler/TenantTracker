@@ -10,6 +10,14 @@ angular.module('TenantCtrl', []).controller('TenantController', function($rootSc
 			$scope.property = response.data;
 		}
 	});
+	
+	
+	$http({url: '/api/tenant/landlord', method:'POST', data: {'landlord_id': $rootScope.currentUser.landlord_id}}).then(function(response) {
+		console.log("Landlord " + response);
+		if(response.data != null){
+			$scope.landlord = response.data;
+		}
+	});
 			// if($scope.appliances[0].status == "Good") {
 			// 	$scope.reqRepairButton = true;
 			// 	$scope.needsRepairButton = false;
