@@ -4,7 +4,32 @@ var models = require('./models');
 
 module.exports = function(app) {
 // APIs
-	// USER APIs =================================================================
+
+	// SIGN UP APIs =================================================================
+		//LANDLORD
+			// adds landlord data to the database
+			app.post('api/addLandord', function(req, res) {
+				var userData=req.body;
+				// auto generates ids here
+				var SystemData ={};
+				console.log(useData);
+				
+			});
+				
+		//TENANT
+		// adds tenant data to the database
+			app.post('api/addTenant', function(req, res) {
+				var userData=req.body;
+				// auto generates ids here
+				var SystemData ={};
+				// needs to query for appropriate landlord and property data to insert here
+				console.log(useData);
+			});
+		
+		
+		
+		
+	// LOGIN APIs =================================================================
 	// compares current password with password for the user in the database
 	app.post('/api/login', function(req, res) {
 		// console.log('attempt api login call with: '+ req.body);
