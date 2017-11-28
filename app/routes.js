@@ -10,8 +10,21 @@ module.exports = function(app) {
 			// adds landlord data to the database
 			app.post('api/addLandord', function(req, res) {
 				var userData=req.body;
+				/*
 				// auto generates ids here
-				var SystemData ={};
+				 //var LLid = someautogenfunction
+				 //var PropID = someautogenfunction
+				//combines userdata info and autogen info into one data appropriate objects
+				var LandlordData ={}; // each of these objects are in the format defined in the model
+				var PropertyData={};
+				var ApplianceData={};
+				
+				User.create(LandlordData).save();
+				Property.create(PropertyData).save();
+				Appliance.create(ApplianceData).save();
+				
+				*/
+				
 				console.log(useData);
 				
 			});
