@@ -18,14 +18,14 @@ angular.module('RentCtrl', []).controller('RentController', function($rootScope,
 
 	// updates tenant rent history for this date
 	$scope.sendRent = function($event) {
-		console.log($event);
+		// console.log($event);
 		$http({url:'/api/rent/send', method:'POST', data: {'rent_id': $event.currentTarget.value }}).then(function(response) {
 	    	$scope.loadRentTable();
 	    });
 	};
 
 	$scope.receiveRent = function($event) {
-		console.log($event);
+		// console.log($event);
 		$http({url:'/api/rent/receive', method:'POST', data: {'rent_id': $event.currentTarget.value }}).then(function(response) {
 	    	$scope.loadRentTable();
 	    });
