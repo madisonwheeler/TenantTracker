@@ -1,21 +1,20 @@
 angular.module('ApplianceCtrl', []).controller('ApplianceController', function($rootScope, $scope, $http, LoginService) {
-	// variables 	
+	// VARIABLES =================================================================
 	$scope.repairRequested = false;
 	$scope.reqRepairButton = true;
 	$scope.needsRepairButton = false;
 	$scope.successMsg = false;
 	$scope.repairDesc = "";
 	$scope.appliances = [];
-	// functions
-	
-	
 
+
+	// FUNCTIONS =================================================================
 	// load appliances onto page
 	$scope.loadAppliances = function() {
 		$http({url: '/api/appliance', method: "GET", params: {"property_id": $rootScope.currentUser.property_id }}).then(function(response) {
-			console.log(response.data);
+			// console.log(response.data);
 			$scope.appliances = response.data;
-			console.log($scope.appliances);
+			// console.log($scope.appliances);
 			if($scope.appliances[0].status == "Good") {
 				$scope.reqRepairButton = true;
 				$scope.needsRepairButton = false;
@@ -25,17 +24,16 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 				$scope.needsRepairButton = true;
 			}
 		});
-
 	}
 
-	// allow user to open request form 
+	// allow user to open request form
 	$scope.requestRepair = function() {
 		$scope.repairRequested = true;
 		$scope.reqRepairButton = false;
 		$scope.successMsg = false;
 	};
 
-	// Sends form data entered after requesting repair to db
+	// Sends form data entered after requesting repair to database
 	$scope.submitRepair = function() {
 		$http({url: '/api/appliance/update', method: "GET", params: {"appliance_id": 1, "repairDesc": $scope.repairDesc}}).then(function(response) {
 			$scope.loadAppliances();
@@ -43,11 +41,10 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 			$scope.reqRepairButton = false;
 			$scope.needsRepairButton = true;
 			$scope.successMsg = true;
-			//$scope.$apply();
 		});
 	};
-		
-	// fixes the repair
+
+	// updates the repair request to be "fixed"
 	$scope.needsRepair = function() {
 		console.log("Here");
 		$http({url: '/api/appliance/fix', method: "GET", params: {"appliance_id": 1}}).then(function(response) {

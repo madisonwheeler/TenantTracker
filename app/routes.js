@@ -1,15 +1,13 @@
+
+//require MODELS and export the APIs
 var models = require('./models');
-//var Todo = require('./models/Todo');
 
 module.exports = function(app) {
-
-// server routes ===========================================================
-
-
-// api calls ===========================================================
-
+// APIs
+	// USER APIs =================================================================
+	// compares current password with password for the user in the database
 	app.post('/api/login', function(req, res) {
-		console.log('attempt api login call with: '+ req.body);
+		// console.log('attempt api login call with: '+ req.body);
 		if(!(req.body.username || req.body.password)) {
 			res.status(404).json({message: 'Username and password are required!'});
 		}
@@ -34,9 +32,9 @@ module.exports = function(app) {
 		}
 	});
 
-
+	// APPLIANCE APIs ============================================================
 	//get all appliance for that property
-    app.get('/api/appliance', function(req, res) {
+  app.get('/api/appliance', function(req, res) {
 		models.Appliance.findAll({
 			where: {property_id: parseInt(req.query.property_id)}
 		}).then(function(appliances) {
@@ -48,13 +46,12 @@ module.exports = function(app) {
 				res.send(appliances);
 			}
 		});
-
-    });
+  });
 
 	//update Appliance status to "Needs Repair"
-    app.get('/api/appliance/update', function(req, res) {
-		console.log("here1");
-		console.log(req.query.repairDesc);
+  app.get('/api/appliance/update', function(req, res) {
+		// console.log("here1");
+		// console.log(req.query.repairDesc);
 		models.Appliance.findOne({
 			where: {id: parseInt(req.query.appliance_id)}
 		}).then(function(appliance) {
@@ -63,146 +60,111 @@ module.exports = function(app) {
 			appliance.save();
 			res.send("Success");
 		});
+  });
 
-
-    });
-
-    //update Appliance status to "Good"
-    app.get('/api/appliance/fix', function(req, res) {
+  //update Appliance status to "Good"
+  app.get('/api/appliance/fix', function(req, res) {
 		models.Appliance.findOne({
 			where: {id: parseInt(req.query.appliance_id)}
 		}).then(function(appliance) {
-			appliance.repairDesc = "";
+			appliance.repair_desc = "";
 			appliance.status = "Good";
 			appliance.save();
 			res.send("Success");
 		});
+	});
 
+	// LANDLORD PAGE APIs ========================================================
+  //get property
+  app.post('/api/landlord/property',function(req, res) {
+  	models.Property.findOne({where: {landlord_id: req.body.landlord_id} }).then(function(property) {
+  		if(property != null) {
+  			res.send(property);
+  		}
+  	});
+  });
 
-    });
+  //get property
+  app.post('/api/landlord/tenants',function(req, res) {
+  	models.User.findAll({where: {landlord_id: req.body.landlord_id} }).then(function(tenants) {
+  		if(tenants != null) {
+  			res.send(tenants);
+  		}
+  	});
+  });
 
+  //get property
+  app.post('/api/landlord/applianceCount',function(req, res) {
+  	models.Appliance.findAll({where: {property_id: req.body.property_id} }).then(function(appliances) {
+  		if(appliances != null) {
+  			res.send(appliances.length);
+  		}
+  	});
+  });
 
-
-    //landlord page routes
-
-
-    //get property
-    app.post('/api/landlord/property',function(req, res) {
-    	models.Property.findOne({where: {landlord_id: req.body.landlord_id} }).then(function(property) {
-    		if(property != null) {
-    			res.send(property);
-    		}
-    	});
-    });
-
-    //get property
-    app.post('/api/landlord/tenants',function(req, res) {
-    	models.User.findAll({where: {landlord_id: req.body.landlord_id} }).then(function(tenants) {
-    		if(tenants != null) {
-    			res.send(tenants);
-    		}
-    	});
-    });
-
-    //get property
-    app.post('/api/landlord/applianceCount',function(req, res) {
-    	models.Appliance.findAll({where: {property_id: req.body.property_id} }).then(function(appliances) {
-    		if(appliances != null) {
-    			res.send(appliances.length);
-    		}
-    	});
-    });
-
-		//tenant page routes
-		app.post('/api/tenant/property', function(req, res) {
-			console.log('call to api/ten/prop');
-			models.Property.findOne({where: {id: req.body.property_id} }).then(function(property){
-				console.log('findOne Property' + property.address);
-				if(property != null){
-					res.send(property);
-				}
-			});
+	// TENANT PAGE APIs ==========================================================
+	//tenant page routes
+	app.post('/api/tenant/property', function(req, res) {
+		// console.log('call to api/ten/prop');
+		models.Property.findOne({where: {id: req.body.property_id} }).then(function(property){
+			console.log('findOne Property' + property.address);
+			if(property != null){
+				res.send(property);
+			}
 		});
+	});
 
-		api.post('/api/tenant/landlord', function(req, res){
-			console.log('call to api/ten/land');
-			models.Landlord.findOne({where: {id: req.body.landlord_id}).then(function(landlord) {
-				console.log('findOne Property ' + landlord.name);
-				if(landlord != null){
-					res.send(landlord);
-				}
-			});
+	//get landlord info for tenant landing page
+	app.post('/api/tenant/landlord', function(req, res){
+		// console.log('call to api/ten/land');
+		models.User.findOne({where: {id: req.body.landlord_id}}).then(function(landlord) {
+			// console.log('findOne landlord ' + landlord.name);
+			if(landlord != null){
+				res.send(landlord);
+			}
 		});
+	});
 
-    //rent page routes
+	// RENT PAGE APIs ============================================================
+  //get rent history from database
+  app.post('/api/rent', function(req, res) {
+  	// console.log("Here");
+  	// console.log(req.body.property_id);
+  	models.Rent.findAll({where: { property_id: req.body.property_id }}).then(function(rents) {
+  		// console.log(rents);
+  		if(rents != null) {
+  			res.send(rents);
+  		}
+  	});
+  });
 
-    //get all rent history
-    app.post('/api/rent', function(req, res) {
-    	console.log("Here");
-    	console.log(req.body.property_id);
-    	models.Rent.findAll({where: { property_id: req.body.property_id }}).then(function(rents) {
-    		console.log(rents);
-    		if(rents != null) {
-    			res.send(rents);
-    		}
-    	});
-    });
+  //update Tenant Rent Status
+  app.post('/api/rent/send', function(req, res) {
+  	// console.log("Here");
+  	// console.log(req.body.property_id);
+  	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
+  		if(rent != null) {
+  			rent.tenant_status = "Sent";
+  			rent.save();
+  			res.send(rent);
+  		}
+  	});
+  });
 
-    //update Tenant Status
-    app.post('/api/rent/send', function(req, res) {
-    	console.log("Here");
-    	console.log(req.body.property_id);
-    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
-    		if(rent != null) {
-    			rent.tenant_status = "Sent";
-    			rent.save();
-    			res.send(rent);
-    		}
-    	});
-    });
+  //update Landlord Rent Status
+  app.post('/api/rent/receive', function(req, res) {
+  	// console.log("Here");
+  	// console.log(req.body.property_id);
+  	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
+  		if(rent != null) {
+  			rent.landlord_status = "Received";
+  			rent.save();
+  			res.send(rent);
+  		}
+  	});
+  });
 
-
-    //update Landlord Status
-    app.post('/api/rent/receive', function(req, res) {
-    	console.log("Here");
-    	console.log(req.body.property_id);
-    	models.Rent.findOne({where: { id: req.body.rent_id }}).then(function(rent) {
-    		if(rent != null) {
-    			rent.landlord_status = "Received";
-    			rent.save();
-    			res.send(rent);
-    		}
-    	});
-    });
-
-	/*app.get('/api/todos', function(req, res) {
-
-		Todo.find(function(err, todos) {
-		    if (err)
-		        res.send(err)
-
-		    res.json(todos); // return all todos in JSON format
-		});
-
-    	});*/
-
-
-	// Create
-
-	// Update
-
-    	// Delete
-
-
-
-
-// authentication routes ===========================================================
-
-
-// frontend routes ===========================================================
-
-
-// route to handle all angular requests ===========================================================
+	// route to handle all angular requests ======================================
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');
 	});

@@ -1,9 +1,11 @@
 angular.module('MainCtrl', []).controller('MainController', function($scope) {
-	// go to landlord login page
+
+	// FUNCTIONS =================================================================
+	// Changes view to the landlord login page
 	$scope.clickedLandlord = function(){
        window.location = "/landlordLogin";
    	}
-	// go to tenant login page
+	// Changes view to the tenant login page
    	$scope.clickedTenant = function(){
    		window.location = "/tenantLogin";
    	}

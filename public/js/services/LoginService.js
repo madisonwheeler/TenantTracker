@@ -4,7 +4,6 @@ angular.module('LoginService', []).factory('LoginService' , function($http) {
 	// authenitcates login creditials
 	return {
 		login : function(username, password) {
-			// console.log($http({url:'/api/login', method:"POST", data: {"username" : username, "password": password}}));
 
 			$http({url:'/api/login', method:'POST', data: {'username': username, 'password' : password}})
 				.then(function(response) {

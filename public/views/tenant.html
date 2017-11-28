@@ -26,7 +26,7 @@
 <!-- Page Content -->
 <div class="container">
 	<!-- Page Heading -->
-	<h1 class="my-4">Welcome!</h1>
+	<h1 class="my-4">Welcome {{ name }} !</h1>
 
 	<!-- Portfolio Item Row -->
 	<div class="row">
@@ -35,14 +35,14 @@
 		</div>
 
 		<div class="col-md-4">
-			<h3 class="my-3">{{property.address}}</h3>
-			<p>Address</p>
+			<h3 class="my-3">Address</h3>
+			<p>{{property.address}}</p>
 			<h3 class="my-3">Apartment Information</h3>
 			<ul>
-				<li>Landlord: </li>
-				<li>Landlord Phone #:</li>
-				<li>Rent Status:</li>
-				<li>Appliance Status: </li>
+				<li>Landlord: {{landlord.name}} </li>
+				<li>Landlord Phone #: {{landlord.phone_number}}</li>
+				<!--<li>Rent Status:</li>
+				<li>Appliance Status: </li>-->
 			</ul>
 		</div>
 	</div>
@@ -51,6 +51,6 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark fixed-bottom">
 	<div class="container">
-    	<p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+    	<p class="m-0 text-center text-white">Copyright &copy; Tenant Tracker 2017</p>
     </div>
 </footer>

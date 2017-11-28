@@ -1,39 +1,36 @@
 angular.module('LandlordCtrl', []).controller('LandlordController', function($rootScope, $scope, $http, $location) {
-
+	// VARIABLES =================================================================
 	$scope.tagline = 'Welcome Landlord!';
-	$scope.clickedHome = function(){
-		window.location = "/";
-	}
-
 	$scope.property = {};
 
+	// FUNCTIONS =================================================================
+
+	// API call to load the Tenants of the current property
 	$http({url:'/api/landlord/tenants', method:'POST', data: {'landlord_id': $rootScope.currentUser.id}}).then(function(response) {
-    	console.log("Tenants: ");
-        console.log(response);
+    	// console.log("Tenants: ");
+      //   console.log(response);
         if(response.data != null){
             $scope.property.tenants = response.data;
         }
     });
 
+	// API call to load the address of the current property
 	$http({url:'/api/landlord/property', method:'POST', data: {'landlord_id': $rootScope.currentUser.id}}).then(function(response) {
-		console.log("Property: ");
-        console.log(response);
+		// console.log("Property: ");
+    //     console.log(response);
         if(response.data != null){
             $scope.property.address = response.data.address;
         }
     });
 
-    // $http({url:'/api/landlord/applianceCount', method:'POST', data: {'property_id': $rootScope.currentUser.property_id }}).then(function(response) {
-    // 	console.log("ApplianceCount: ");
-    //     console.log(response);
-    //     if(response.data != null){
-    //         $scope.property.applianceCount = response.data;
-    //     }
-    // });
-
-
+		// Changes the view to the appliances page
     $scope.toAppPage = function() {
     	$location.path("/appliances");
     }
-    
+
+		// Changes the view to the home page
+		$scope.clickedHome = function(){
+			window.location = "/";
+		}
+
 });
