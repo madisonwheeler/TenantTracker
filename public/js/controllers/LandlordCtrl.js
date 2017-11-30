@@ -1,4 +1,4 @@
-angular.module('LandlordCtrl', []).controller('LandlordController', function($rootScope, $scope, $http, $location) {
+angular.module('LandlordCtrl', []).controller('LandlordController', function($sessionStorage, $scope, $http, $location) {
 	// VARIABLES =================================================================
 	$scope.tagline = 'Welcome Landlord!';
 	$scope.property = {};
@@ -6,7 +6,7 @@ angular.module('LandlordCtrl', []).controller('LandlordController', function($ro
 	// FUNCTIONS =================================================================
 
 	// API call to load the Tenants of the current property
-	$http({url:'/api/landlord/tenants', method:'POST', data: {'landlord_id': $rootScope.currentUser.id}}).then(function(response) {
+	$http({url:'/api/landlord/tenants', method:'POST', data: {'landlord_id': $sessionStorage.currentUser.id}}).then(function(response) {
     	// console.log("Tenants: ");
       //   console.log(response);
         if(response.data != null){
@@ -15,7 +15,7 @@ angular.module('LandlordCtrl', []).controller('LandlordController', function($ro
     });
 
 	// API call to load the address of the current property
-	$http({url:'/api/landlord/property', method:'POST', data: {'landlord_id': $rootScope.currentUser.id}}).then(function(response) {
+	$http({url:'/api/landlord/property', method:'POST', data: {'landlord_id': $sessionStorage.currentUser.id}}).then(function(response) {
 		// console.log("Property: ");
     //     console.log(response);
         if(response.data != null){

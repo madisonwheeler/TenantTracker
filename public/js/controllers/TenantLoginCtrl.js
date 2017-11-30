@@ -1,4 +1,4 @@
-angular.module('TenantLoginCtrl', []).controller('TenantLoginController', function($rootScope, $scope, $http, $location, LoginService) {
+angular.module('TenantLoginCtrl', []).controller('TenantLoginController', function($sessionStorage, $scope, $http, $location, LoginService) {
 
 	$scope.username = "";
 	$scope.password = "";
@@ -8,7 +8,7 @@ angular.module('TenantLoginCtrl', []).controller('TenantLoginController', functi
 		$http({url:'/api/login', method:'POST', data: {'username': $scope.username, 'password' : $scope.password}}).then(function(response) {
             console.log(response);
             if(response.data.message == "success"){
-                $rootScope.currentUser = response.data.user;
+								$sessionStorage.currentUser = response.data.user;
                 console.log('successful login');
                 $scope.error = '';
                 $scope.username = '';

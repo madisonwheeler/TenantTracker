@@ -1,4 +1,4 @@
-angular.module('ApplianceCtrl', []).controller('ApplianceController', function($rootScope, $scope, $http, LoginService) {
+angular.module('ApplianceCtrl', []).controller('ApplianceController', function($sessionStorage, $scope, $http, LoginService) {
 	// VARIABLES =================================================================
 	$scope.repairRequested = false;
 	$scope.reqRepairButton = true;
@@ -11,7 +11,7 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 	// FUNCTIONS =================================================================
 	// load appliances onto page
 	$scope.loadAppliances = function() {
-		$http({url: '/api/appliance', method: "GET", params: {"property_id": $rootScope.currentUser.property_id }}).then(function(response) {
+		$http({url: '/api/appliance', method: "GET", params: {"property_id": $sessionStorage.currentUser.property_id }}).then(function(response) {
 			// console.log(response.data);
 			$scope.appliances = response.data;
 			// console.log($scope.appliances);
