@@ -30,7 +30,7 @@
 	<h2>Please enter your information below</h2>
 	<br>
 	<br>
-		<div class="form-group">
+		<form>
 			<h3> Landlord Information</h3>
 				<div class="form-group">
 					<label for="username"><b>Username</b></label>
@@ -59,12 +59,8 @@
 					<label for="address"><b>Address</b></label>
 					<input type="text" class="form-control" id="address" placeholder="eg: 111 Something ST" ng-model="pAddress">
 				</div>
-				<div class="form-group">
-					<label for="appname"><b>Appliance Name</b></label>
-					<input type="text" class="form-control" id="appname" placeholder="Please enter the name of your appliance" ng-model="Aname">
-				</div>
 				<br>
 				<br>
 			<button type="submit" class="btn btn-default" ng-click="submitLandlordData()">Submit</button>
-		</div>
+		</form>
 </div>

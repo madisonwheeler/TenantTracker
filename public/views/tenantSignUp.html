@@ -23,14 +23,14 @@
 	</nav>
 
 <!-- Page Content -->
-<div class="container" ng-controller="LandlordSignUpController">
+<div class="container" ng-controller="TenantSignUpController">
 
 	<!-- Page Heading -->
 	<h1 class="my-4">New Tenant</h1>
 	<h2>Please enter your information below</h2>
 	<br>
 	<br>
-		<div class="form-group">
+		<form>
 			<h3> Tenant Information</h3>
 				<div class="form-group">
 					<label for="username"><b>Username</b></label>
@@ -56,11 +56,11 @@
 				<br>
 			<h3> Rental Property Information</h3>
 				<div class="form-group">
-					<label for="ID"><b>LandLord ID</b></label>
-					<input type="text" class="form-control" id="ID" placeholder="please enter your Landlord's ID number" ng-model="lId">
+					<label for="address"><b>Address</b></label>
+					<input type="text" class="form-control" id="address" placeholder="eg: 1111 Something ST" ng-model="pAddress">
 				</div>
 				<br>
 				<br>
 			<button type="submit" class="btn btn-default" ng-click="submitTenantData()">Submit</button>
-		</div>
+		</form>
 </div>

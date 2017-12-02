@@ -1,26 +1,26 @@
 angular.module('TenantSignUpCtrl', []).controller('TenantSignUpController', function( $scope, $http) {
-$scope.lUserName="";
-	$scope.tPassword="";
-	$scope.tName="";
-	$scope.tEmail="";
-	$scope.lId="";
 	
 
 
 	//sends form data to be entered in DB
 	$scope.submitTenantData=function(){
-	console.log('b4set');
+
 		var tenantData={
-			'Tusername': $scope.lUserName,
-			'Tpassword':$scope.lPassword,
-			'Tname':$scope.lName,
-			'Temail':$scope.lEmail,
-			'Tphonenumber':$scope.PNumber,
-			'Lid':$scope.lId
+			"username": $scope.tUserName,
+			"password":$scope.tPassword,
+			"tname":$scope.tName,
+			"email":$scope.tEmail,
+			"phonenumber":$scope.tPNumber,
+			"user_type":'tenant',
+			"address":$scope.pAddress
 		};
 		console.log(tenantData);
-		console.log('after set');
-		$http({url:'/api/addTenant',method:"POST", params:tenantData})
+		console.log('entering new tenant data');
+		
+		$http({url:'/api/addTenant',method:"POST", data:tenantData}).then(function(response) {
+			console.log("post complete: going to tenant login page");
+			window.location = "/tenantLogin";
+		});
 	};
 
 

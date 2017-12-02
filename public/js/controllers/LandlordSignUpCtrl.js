@@ -5,29 +5,33 @@ angular.module('LandlordSignUpCtrl', []).controller('LandlordSignUpController', 
 	$scope.lEmail="";
 	$scope.PNumber="";
 	$scope.pAddress="";
-	$scope.Aname="";
+	
 
 
 	//sends form data to be entered in DB
 	$scope.submitLandlordData=function(){
-	console.log('b4set');
+	
 		var landlordData={
-			'Lusername': $scope.lUserName,
-			'Lpassword':$scope.lPassword,
-			'Lname':$scope.lName,
-			'Lemail':$scope.lEmail,
-			'Lphonenumber':$scope.PNumber,
-			'Paddress':$scope.pAddress,
-			'Aname':$scope.Aname
+			"username": $scope.lUserName,
+			"password":$scope.lPassword,
+			"lname":$scope.lName,
+			"phonenumber":$scope.lPNumber,
+			"email":$scope.lEmail,
+			"user_type":'landlord',
+			"rentaladdress":$scope.pAddress,
 		};
-		console.log(landlordData);
-		console.log('after set');
-		$http({url:'/api/addLandord',method:"POST", params:landlordData})
+		
+		console.log('entering new landlord data');
+		
+		$http({url: '/api/addLandlord', method: "POST", data:landlordData }).then(function(response) {
+			console.log("post complete: going to landlord login page");
+			window.location = "/landlordLogin";
+		});
 	};
 	
 
 
-
+//{"username": $scope.lUserName, "password":$scope.lPassword, "name":$scope.lName, "phonenumber":$scope.lPNumber, "email":$scope.lEmail, "user_type":'landlord', "rentaladdress":$scope.pAddress }
 
 
 
