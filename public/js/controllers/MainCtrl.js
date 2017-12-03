@@ -9,5 +9,14 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
    	$scope.clickedTenant = function(){
    		window.location = "/tenantLogin";
    	}
+   	//Changes view to the lanlord sign up page
+   	$scope.clickedLandlordR = function(){
+       window.location = "/landlordSignUp";
+   	}
+   	
+   	//Changes view to the lanlord sign up page
+   	$scope.clickedTenantR = function(){
+       window.location = "/tenantSignUp";
+   	}
 
 });

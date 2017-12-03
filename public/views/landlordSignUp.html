@@ -1,0 +1,66 @@
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="/">Tenant Tracker</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home</a>
+						<span class="sr-only">(current)</span>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">About</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+<!-- Page Content -->
+<div class="container" ng-controller="LandlordSignUpController">
+
+	<!-- Page Heading -->
+	<h1 class="my-4">New Landlord</h1>
+	<h2>Please enter your information below</h2>
+	<br>
+	<br>
+		<form>
+			<h3> Landlord Information</h3>
+				<div class="form-group">
+					<label for="username"><b>Username</b></label>
+					<input type="text" class="form-control" id="username" placeholder="Please enter a username" ng-model="lUserName">
+				</div>
+				<div class="form-group">
+					<label for="password"><b>Password</b></label>
+					<input type="text" class="form-control" id="password" placeholder="Please enter your password" ng-model="lPassword">
+				</div>
+				<div class="form-group">
+					<label for="name"><b>Name</b></label>
+					<input type="text" class="form-control" id="name" placeholder="eg: Jane Doe" ng-model="lName">
+				</div>
+				<div class="form-group">
+					<label for="email"><b>Email</b></label>
+					<input type="text" class="form-control" id="email" placeholder="eg: somthing@somewhere.com" ng-model="lEmail">
+				</div>
+				<div class="form-group">
+					<label for="pnumber"><b>PhoneNumber</b></label>
+					<input type="text" class="form-control" id="pnumber" placeholder="eg: 1115558888" ng-model="lPNumber">
+				</div>
+				<br>
+				<br>
+			<h3> Rental Property Information</h3>
+				<div class="form-group">
+					<label for="address"><b>Address</b></label>
+					<input type="text" class="form-control" id="address" placeholder="eg: 111 Something ST" ng-model="pAddress">
+				</div>
+				<br>
+				<br>
+			<button type="submit" class="btn btn-default" ng-click="submitLandlordData()">Submit</button>
+		</form>
+</div>
