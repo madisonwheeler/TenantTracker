@@ -32,7 +32,7 @@ angular.module('RentCtrl', []).controller('RentController', function($sessionSto
 	};
 
 	$scope.addRentDate = function() {
-		$http({url:'/api/rent/add', method:'POST', data: {'property_id': $sessionStorage.currentUser.property_id, 'rent_date': rentDate} }).then(function(response) {
+		$http({url:'/api/rent/add', method:'POST', data: {'property_id': $sessionStorage.currentUser.property_id, 'date': $scope.rentDate} }).then(function(response) {
 			$scope.loadRentTable();
 		});
 	};

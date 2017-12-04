@@ -231,14 +231,17 @@ module.exports = function(app) {
   	});
   });
 
+  //add a date to the rent db
   app.post('/api/rent/add', function(req, res) {
   	models.Rent.findOne({where: {property_id: req.body.property_id}}).then(function(rents) {
-			var rentData = { date: req.body.date,
-							 landlord_status: "Not Received",
-							 tenant_status: "Not Sent",
-							 property_id: req.body.property_id
-							}
+		var rentData = { date: req.body.date,
+						 landlord_status: "Not Received",
+						 tenant_status: "Not Sent",
+						 property_id: req.body.property_id
+						}
+		console.log(rentData);
   		models.Rent.create(rentData);
+  		res.send(rents);
   	});
   });
 

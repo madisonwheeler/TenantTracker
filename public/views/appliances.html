@@ -38,7 +38,7 @@
 						<a href="#">{{appliances[0].name}}</a>
 		  		</h4>
 					<p>Status: {{appliances[0].status}}</p>
-					<p ng-show("needsRepairMessage">Repair Notes: {{appliances[0].repair_desc}}</p>
+					<p ng-show="needsRepairButton">Repair Notes: {{appliances[0].repair_desc}}</p>
 					<button class="btn btn-primary" ng-click="requestRepair()" ng-show="reqRepairButton">Request Repairs</button>
 					<button class="btn btn-danger" ng-click="needsRepair()" ng-show="needsRepairButton">Repairs Completed</button>
 					<button class="btn btn-primary" ng-click="requestRepair()" ng-show="updateRepairStatusButton">Update Repair Notes</button>
