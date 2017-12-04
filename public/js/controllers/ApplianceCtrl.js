@@ -46,7 +46,7 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 	$scope.addAppliance = function(){
 		var appData={
 			"Aname":$scope.newApp,
-			"property_id": $sesisonStorage.currentUser.property_id
+			"property_id": $sessionStorage.currentUser.property_id
 		}
 		$http({url: '/api/appliance/add', method: "POST", data: appData }).then(function(response) {
 			$scope.loadAppliances();
