@@ -38,11 +38,12 @@
 						<a href="#">{{appliances[0].name}}</a>
 		  		</h4>
 					<p>Status: {{appliances[0].status}}</p>
-					<p>Description: {{appliances[0].repair_desc}}</p>
+					<p ng-show("needsRepairMessage">Repair Notes: {{appliances[0].repair_desc}}</p>
 					<button class="btn btn-primary" ng-click="requestRepair()" ng-show="reqRepairButton">Request Repairs</button>
-					<button class="btn btn-danger" ng-click="needsRepair()" ng-show="needsRepairButton">Needs Repairs</button>
+					<button class="btn btn-danger" ng-click="needsRepair()" ng-show="needsRepairButton">Repairs Completed</button>
+					<button class="btn btn-primary" ng-click="requestRepair()" ng-show="updateRepairStatusButton">Update Repair Notes</button>
 					<div class="form-group" ng-show="repairRequested">
-						<label for="repairRequest"><b>Description:</b></label>
+						<label for="repairRequest"><b>Repair Notes:</b></label>
 						<textarea class="form-control" id="repairRequest" rows="3" ng-model="repairDesc"></textarea>
 						<button class="btn btn-primary" ng-click="submitRepair()">Submit</button>
 					</div>

@@ -231,6 +231,17 @@ module.exports = function(app) {
   	});
   });
 
+  app.post('/api/rent/add', function(req, res) {
+  	models.Rent.findOne({where: {property_id: req.body.property_id}}).then(function(rents) {
+			var rentData = { date: req.body.date,
+							 landlord_status: "Not Received",
+							 tenant_status: "Not Sent",
+							 property_id: req.body.property_id
+							}
+  		models.Rent.create(rentData);
+  	});
+  });
+
 	// route to handle all angular requests ======================================
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');

@@ -1,4 +1,4 @@
-angular.module('ApplianceCtrl', []).controller('ApplianceController', function($rootScope, $scope, $http, LoginService) {
+angular.module('ApplianceCtrl', []).controller('ApplianceController', function($sessionStorage, $scope, $http, LoginService) {
 	// VARIABLES =================================================================
 	$scope.repairRequested = false;
 	$scope.reqRepairButton = true;
@@ -6,6 +6,7 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 	//$scope.noAppliance = false;
 	$scope.needsRepairButton = false;
 	$scope.successMsg = false;
+	$scope.updateRepairStatusButton = false;
 	$scope.repairDesc = "";
 	$scope.appliances = [];
 
@@ -13,7 +14,7 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 	// FUNCTIONS =================================================================
 	// load appliances onto page
 	$scope.loadAppliances = function() {
-		$http({url: '/api/appliance', method: "GET", params: {"property_id": $rootScope.currentUser.property_id }}).then(function(response) {
+		$http({url: '/api/appliance', method: "GET", params: {"property_id": $sessionStorage.currentUser.property_id }}).then(function(response) {
 			console.log(response);
 			if(angular.equals( response.data,"Not found")){
 					$scope.hasAppliance = false;
@@ -28,10 +29,14 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 				if($scope.appliances[0].status == "Good") {
 					$scope.reqRepairButton = true;
 					$scope.needsRepairButton = false;
+					$scope.updateRepairStatusButton = false;
 				}
 				else {
 					$scope.reqRepairButton = false;
 					$scope.needsRepairButton = true;
+					if($sessionStorage.currentUser.user_type == "landlord") {
+						$scope.updateRepairStatusButton = true;
+					}
 				}
 			}
 			
@@ -41,7 +46,7 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 	$scope.addAppliance = function(){
 		var appData={
 			"Aname":$scope.newApp,
-			"property_id": $rootScope.currentUser.property_id
+			"property_id": $sesisonStorage.currentUser.property_id
 		}
 		$http({url: '/api/appliance/add', method: "POST", data: appData }).then(function(response) {
 			$scope.loadAppliances();
@@ -56,7 +61,7 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 
 	// Sends form data entered after requesting repair to database
 	$scope.submitRepair = function() {
-		var upData = {"property_id": $rootScope.currentUser.property_id, 
+		var upData = {"property_id": $sessionStorage.currentUser.property_id, 
 									"repairDesc": $scope.repairDesc}
 	
 		$http({url: '/api/appliance/update', method: "GET", params: upData }).then(function(response) {
@@ -65,13 +70,16 @@ angular.module('ApplianceCtrl', []).controller('ApplianceController', function($
 			$scope.reqRepairButton = false;
 			$scope.needsRepairButton = true;
 			$scope.successMsg = true;
+			if($sessionStorage.currentUser.user_type == "landlord"){
+				$scope.updateRepairStatusButton = true;
+			}
 		});
 	};
 
 	// updates the repair request to be "fixed"
 	$scope.needsRepair = function() {
 		//console.log("Here");
-		$http({url: '/api/appliance/fix', method: "GET", params: {"property_id": $rootScope.currentUser.property_id}}).then(function(response){
+		$http({url: '/api/appliance/fix', method: "GET", params: {"property_id": $sessionStorage.currentUser.property_id}}).then(function(response){
 			//console.log("Here2");
 			$scope.loadAppliances();
 			$scope.reqRepairButton = true;
