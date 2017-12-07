@@ -18,6 +18,18 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			templateUrl: 'views/landlordLogin.html',
 			controller: 'LandlordLoginController'
 		})
+		
+		// link to landlords sign up page
+		.when('/landlordSignUp', {
+			templateUrl: 'views/landlordSignUp.html',
+			controller: 'LandlordSignUpController'
+		})
+		
+		// link to tenants sign up page
+		.when('/tenantSignUp', {
+			templateUrl: 'views/tenantSignUp.html',
+			controller: 'TenantSignUpController'
+		})
 
 		// link to landlord homepage
 		.when('/landlord', {

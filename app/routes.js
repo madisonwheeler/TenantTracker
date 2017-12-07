@@ -4,7 +4,61 @@ var models = require('./models');
 
 module.exports = function(app) {
 // APIs
-	// USER APIs =================================================================
+
+	// SIGN UP APIs =================================================================
+		//LANDLORD
+			// adds landlord data to the database
+			app.post('/api/addLandlord', function(req, res) {
+				
+				var ldata = req.body;
+				var userData = { username:ldata.username,
+										 password:ldata.password, 
+										 name:ldata.lname, 
+										 phone_number:ldata.phonenumber, 	
+										 email:ldata.email, 
+										 user_type:ldata.user_type, 
+										 landlord_id:0, 
+										 property_id: 0 }
+		 
+				models.User.create(userData).then( user=>{
+					models.Property.create({address:ldata.rentaladdress , landlord_id:user.id}).then(property =>{
+						user.property_id = property.id;
+						user.save();
+					})
+				}).then(function(){
+						res.send("Success");
+					});		
+			});
+				
+		//TENANT
+		// adds tenant data to the database
+			app.post('/api/addTenant', function(req, res) {
+				console.log(req.body.address);
+				models.Property.findOne({where: {address: req.body.address} }).then(function(property) {
+				console.log(property);
+					var tdata = req.body;
+					var userData = { username:tdata.username,
+											 password:tdata.password, 
+											 name:tdata.tname, 
+											 phone_number:tdata.phonenumber, 	
+											 email:tdata.email, 
+											 user_type:tdata.user_type,
+											 landlord_id:property.landlord_id, 
+											 property_id: property.id }
+											 
+					models.User.create(userData).then(function(){
+					
+						res.send("Success");
+						
+					})
+				});
+				
+			});
+		
+		
+		
+		
+	// LOGIN APIs =================================================================
 	// compares current password with password for the user in the database
 	app.post('/api/login', function(req, res) {
 		// console.log('attempt api login call with: '+ req.body);
@@ -38,8 +92,8 @@ module.exports = function(app) {
 		models.Appliance.findAll({
 			where: {property_id: parseInt(req.query.property_id)}
 		}).then(function(appliances) {
-			//console.log(appliances);
-			if(appliances == null) {
+			console.log(appliances);
+			if(appliances.length == 0) {
 				res.send("Not found");
 			}
 			else {
@@ -47,13 +101,26 @@ module.exports = function(app) {
 			}
 		});
   });
-
+	// add appliance for a property
+	app.post('/api/appliance/add', function(req,res){
+		var appData= {  name: req.body.Aname,
+										status: "Good",
+										repair_desc:"",
+										property_id:req.body.property_id
+								 }
+		models.Appliance.create(appData).then(function(){
+			res.send("Success");
+		
+		})
+	});
+	
+	
 	//update Appliance status to "Needs Repair"
   app.get('/api/appliance/update', function(req, res) {
 		// console.log("here1");
 		// console.log(req.query.repairDesc);
 		models.Appliance.findOne({
-			where: {id: parseInt(req.query.appliance_id)}
+			where: {property_id: parseInt(req.query.property_id)}
 		}).then(function(appliance) {
 			appliance.repair_desc = req.query.repairDesc;
 			appliance.status = "Needs Repair";
@@ -65,7 +132,7 @@ module.exports = function(app) {
   //update Appliance status to "Good"
   app.get('/api/appliance/fix', function(req, res) {
 		models.Appliance.findOne({
-			where: {id: parseInt(req.query.appliance_id)}
+			where: {property_id: parseInt(req.query.property_id)}
 		}).then(function(appliance) {
 			appliance.repair_desc = "";
 			appliance.status = "Good";
@@ -161,6 +228,20 @@ module.exports = function(app) {
   			rent.save();
   			res.send(rent);
   		}
+  	});
+  });
+
+  //add a date to the rent db
+  app.post('/api/rent/add', function(req, res) {
+  	models.Rent.findOne({where: {property_id: req.body.property_id}}).then(function(rents) {
+		var rentData = { date: req.body.date,
+						 landlord_status: "Not Received",
+						 tenant_status: "Not Sent",
+						 property_id: req.body.property_id
+						}
+		console.log(rentData);
+  		models.Rent.create(rentData);
+  		res.send(rents);
   	});
   });
 
