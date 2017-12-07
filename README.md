@@ -12,14 +12,17 @@ Tenant tracker is built with MEAN.js (Angularjs, MongoDB, Epress, and Node)
 Starting template provided by scotch-io [here](https://github.com/scotch-io/starter-node-angular)
 
 ## How to run(linux only)
-install MEANjs [here](http://meanjs.org/)
 
-clone this repo to your local machine
+1. Clone this repo to your local machine
 
-open terminal and cd into TenantTracker
+2. Navigate to the Tenant Tracker folder in a CLI (Command-line interface)
 
-run `bower install`
+3. Install required dependencies using the following commands: 
+      sudo npm install npm -g
+      npm install 
+      bower install
 
-run `npm install`
+4. To start the application use the following command: 
+      npm start
 
-run `node server` to view project on localhost:8080 
+5. After using npm start, enter localhost:8080 in the address bar of any web browser in your Unix environment to view the application.
