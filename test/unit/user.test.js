@@ -1,11 +1,20 @@
+//==============ROUTE / API CALL UNIT TESTS==================
+
+// run tests by using 'npm db test'
+
 var db = require('../../app/models');
 var User = db.User;
+var app      = require('../../app/routes.js');
+var Bluebird = require('bluebird');
+var expect   = require('expect.js');
+var request  = require('supertest');
 
 'use strict';
 var expect = require('expect.js');
 
-//Test that the User routes connect to the database
-describe('models/User', function () {
+
+//Test API Calls & Routes
+describe('../../app/routes.js', function () {
   before(function () {
     //requires a proper database connection before test begins
     return require('../../app/models').sequelize.sync();
@@ -16,80 +25,119 @@ describe('models/User', function () {
     this.User = require('../../app/models').User;
   });
 
-  describe('create', function () {
+
+  //==============LOGIN API CALL UNIT TESTS==================
+  describe('StartApp', function (done) {
     //calls test script in package
-    it('Tests creation of a User', function () {});
-  });
-});
-
-//test that the Rent routes connect to the database
-describe('models/Rent', function () {
-  before(function () {
-    //requires a proper database connection before test begins
-    return require('../../app/models').sequelize.sync();
+    it('Test app start', function () {
+      request(app).get('/').expect(200, done);
+    });
   });
 
-  beforeEach(function () {
-    //checks validity of Rent model
-    this.Rent = require('../../app/models').Rent;
-  });
-
-  describe('create', function () {
+  describe('UserLoginRoute', function (done) {
     //calls test script in package
-    it('Tests creation of a Rent Payment', function () {});
-  });
-});
-
-//test that the Appliance routes connect to the database
-describe('models/Appliance', function () {
-  before(function () {
-    //requires a proper database connection before test begins
-    return require('../../app/models').sequelize.sync();
+    it('Test user login', function () {
+      request(app).get('/api/login').expect(200, done);
+    });
   });
 
-  beforeEach(function () {
-    //checks validity of Appliance model
-    this.User = require('../../app/models').User;
-  });
+  //==============APPLIANCE API CALL UNIT TESTS==================
 
-  describe('create', function () {
+  describe('ViewApplianceRoute', function (done) {
     //calls test script in package
-    it('Tests creation of an Appliance', function () {});
-  });
-});
-
-//test that the Property routes connect to the database
-describe('models/Property', function () {
-  before(function () {
-    //requires a proper database connection before test begins
-    return require('../../app/models').sequelize.sync();
+    it('Test appliance page route', function () {
+      request(app).get('/api/appliance').expect(200, done);
+    });
   });
 
-  beforeEach(function () {
-    //checks validity of Property model
-    this.User = require('../../app/models').User;
-  });
-
-  describe('create', function () {
+  describe('AddApplianceRoute', function (done) {
     //calls test script in package
-    it('Tests creation of a Property', function () {});
-  });
-});
-
-//test that the Index homepage routes connect to the database
-describe('models/index', function () {
-  before(function () {
-    //requires a proper database connection before test begins
-    return require('../../app/models').sequelize.sync();
+    it('Test adding appliance route', function () {
+      request(app).get('/api/appliance/add').expect(200, done);
+    });
   });
 
-  beforeEach(function () {
-    //checks validity of Index model
-    this.Index = require('../../app/models').Index;
-  });
-
-  describe('create', function () {
+    describe('UpdateApplianceRoute', function (done) {
     //calls test script in package
-    it('Tests creation of index', function () {});
+    it('Test updating appliance information route', function () {
+      request(app).get('/api/appliance/update').expect(200, done);
+    });
   });
+
+  describe('FixApplianceRoute', function (done) {
+    //calls test script in package
+    it('Test setting appliance fix status route', function () {
+      request(app).get('/api/appliance/fix').expect(200, done);
+    });
+  });
+
+  //==============LANDLORD PROPERTY HOMEPAGE API CALL UNIT TESTS==================
+
+  describe('LandlordProperty', function (done) {
+    //calls test script in package
+    it('Test property get route', function () {
+      request(app).get('/api/landlord/property').expect(200, done);
+    });
+  });
+
+  describe('PropertyTenantView', function (done) {
+    //calls test script in package
+    it('Test property tenant list route', function () {
+      request(app).get('/api/landlord/tenants').expect(200, done);
+    });
+  });
+
+    describe('PropertyApplianceCount', function (done) {
+    //calls test script in package
+    it('Test property appliance count route', function () {
+      request(app).get('/api/landlord/applianceCount').expect(200, done);
+    });
+  });
+
+  //==============TENANT PROPERTY HOMEPAGE API CALL UNIT TESTS==================
+
+  describe('TenantProperty', function (done) {
+    //calls test script in package
+    it('Test tenant property get route', function () {
+      request(app).get('/api/tenant/property').expect(200, done);
+    });
+  });
+
+  describe('TenantProperty', function (done) {
+    //calls test script in package
+    it('Test tenant get landlord route', function () {
+      request(app).get('/api/tenant/landlord').expect(200, done);
+    });
+  });
+
+  //==============RENT PAGE API CALL UNIT TESTS==================
+
+  describe('RentView', function (done) {
+    //calls test script in package
+    it('Test rent page route', function () {
+      request(app).get('/api/rent').expect(200, done);
+    });
+  });
+
+  describe('AddRentRoute', function (done) {
+    //calls test script in package
+    it('Test adding rent route', function () {
+      request(app).get('/api/rent/add').expect(200, done);
+    });
+  });
+
+    describe('UpdateRentRoute', function (done) {
+    //calls test script in package
+    it('Test receive rent route', function () {
+      request(app).get('/api/rent/receive').expect(200, done);
+    });
+  });
+
+  describe('FixApplianceRoute', function (done) {
+    //calls test script in package
+    it('Test sent rent route', function () {
+      request(app).get('/api/rent/send').expect(200, done);
+    });
+  });
+
 });
