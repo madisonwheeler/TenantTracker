@@ -1,6 +1,6 @@
 //==============ROUTE / API CALL UNIT TESTS==================
 
-// run tests by using 'npm db test'
+// run tests by using 'npm test'
 
 var db = require('../../app/models');
 var User = db.User;
